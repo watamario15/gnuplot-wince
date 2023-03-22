@@ -64,7 +64,6 @@ typedef struct {
 #define PM3D_USE_COLORSPEC_INSTEAD_OF_GRAY  -12345
 #define PM3D_USE_RGB_COLOR_INSTEAD_OF_GRAY  -12346
 #define PM3D_USE_BACKGROUND_INSTEAD_OF_GRAY -12347
-#define PM3D_USE_BORDERSPEC_INSTEAD_OF_GRAY -12348
 
 static int allocated_quadrangles = 0;
 static int current_quadrangle = 0;
@@ -437,8 +436,6 @@ void pm3d_depth_queue_flush(void)
 	    /* set the color */
 	    if (qp->gray == PM3D_USE_COLORSPEC_INSTEAD_OF_GRAY)
 		apply_pm3dcolor(&qp->from_plot->lp_properties.pm3d_color);
-	    else if (qp->gray == PM3D_USE_BORDERSPEC_INSTEAD_OF_GRAY)
-		apply_pm3dcolor(&qp->from_plot->fill_properties.border_color);
 	    else if (qp->gray == PM3D_USE_BACKGROUND_INSTEAD_OF_GRAY)
 		term->linetype(LT_BACKGROUND);
 	    else if (qp->gray == PM3D_USE_RGB_COLOR_INSTEAD_OF_GRAY)
@@ -1246,7 +1243,6 @@ pm3d_add_polygon(struct surface_points *plot, gpdPoint corners[], int vertices)
 
     } else if (plot->pm3d_color_from_column
 		&& !(plot->plot_style == POLYGONS)) {
-	/* FIXME: color_from_rgbvar need only be set once per plot */
 	/* This is the usual path for 'splot with boxes' */
 	color_from_rgbvar = TRUE;
 	if (pm3d_shade.strength > 0) {
@@ -1296,8 +1292,10 @@ pm3d_add_polygon(struct surface_points *plot, gpdPoint corners[], int vertices)
 	}
 
     } else {
-	/* This is the usual [only?] path for 'splot with zerror' */
-	q->gray = PM3D_USE_BORDERSPEC_INSTEAD_OF_GRAY;
+	/* This is the usual [only?] path for 'splot with zerror'.
+	 * It also handles some cases of 'splot with boxes'.
+	 */
+	q->gray = PM3D_USE_COLORSPEC_INSTEAD_OF_GRAY;
     }
 }
 
@@ -1624,7 +1622,7 @@ apply_lighting_model( struct coordinate *v0, struct coordinate *v1,
 
 
 /* The pm3d code works with gpdPoint data structures (double: x,y,z,color)
- * term->filled_polygon want gpiPoint data (int: x,y,style).
+ * term->filled_polygon wants gpiPoint data (int: x,y,style).
  * This routine converts from gpdPoint to gpiPoint
  */
 static void
@@ -1701,15 +1699,24 @@ filled_polygon(struct surface_points *from_plot, gpdPoint *corners, int fillstyl
 
     term->filled_polygon(nv, icorners);
 
-    if (pm3d.border.l_type != LT_NODRAW) {
+    /* FIXME: Should this apply to other plot styles as well? */
+    /*        Should we apply a full set of line properties?  */
+    if (from_plot && from_plot->plot_style == BOXES) {
+	t_colorspec *bordercolor = &(from_plot->fill_properties.border_color);
+	if (bordercolor->type == TC_LT && bordercolor->lt == LT_NODRAW)
+	    return;
+	apply_pm3dcolor(bordercolor);
+    } else {
+	if (pm3d.border.l_type == LT_NODRAW)
+	    return;
 	/* LT_DEFAULT means draw border in current color (set pm3d border retrace) */
 	if (pm3d.border.l_type != LT_DEFAULT)
 	    term_apply_lp_properties(&pm3d.border);
+    }
 
-	term->move(icorners[0].x, icorners[0].y);
-	for (i = nv-1; i >= 0; i--) {
-	    term->vector(icorners[i].x, icorners[i].y);
-	}
+    term->move(icorners[0].x, icorners[0].y);
+    for (i = nv-1; i >= 0; i--) {
+	term->vector(icorners[i].x, icorners[i].y);
     }
 }
 
