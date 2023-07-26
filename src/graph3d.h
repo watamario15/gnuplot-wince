@@ -62,6 +62,21 @@ typedef struct gnuplot_contours {
     double z;
 } gnuplot_contours;
 
+typedef enum cfill_mode {
+    CFILL_AUTO,
+    CFILL_ZTICS,
+    CFILL_CBTICS,
+    CFILL_LIST
+} t_cfill_mode;
+
+typedef struct contourfill {
+    t_cfill_mode mode;
+    int nslices;
+    int tic_level;
+    int firstlinetype;
+} t_contourfill;
+#define MAX_ZSLICES 100
+
 typedef struct iso_curve {
     struct iso_curve *next;
     int p_max;			/* how many points are allocated */
@@ -113,7 +128,8 @@ typedef struct surface_points {
     struct iso_curve *iso_crvs;	/* the actual data */
     char pm3d_where[8];		/* explicitly given base, top, surface */
 
-    struct zslice *zclip;	/* pm3d surface z-clipping (contour fill) */
+    struct zslice *zclip;	/* pm3d surface z-clipping array (contour fill) */
+    int zclip_index;		/* index into zclip[] */
 
 } surface_points;
 
@@ -127,11 +143,15 @@ extern double xscale3d, yscale3d, zscale3d;
 extern double xcenter3d, ycenter3d, zcenter3d;
 extern double radius_scaler;
 
+/* "set cntrlabel" parameters */
 extern t_contour_placement draw_contour;
 extern TBOOLEAN	clabel_onecolor;
 extern int clabel_start;
 extern int clabel_interval;
 extern char *clabel_font;
+
+/* "set contourfill" parameters */
+extern t_contourfill contourfill;
 
 extern TBOOLEAN	draw_surface;
 extern TBOOLEAN	implicit_surface;
