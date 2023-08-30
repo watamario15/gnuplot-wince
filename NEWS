@@ -9,6 +9,13 @@ Changes between 6.0-rc1 and -rc2
 	2) If neither mergesort nor glibc stable qsort is available,
 	   modify internal gnuplot structures to contain a secondary sort key
 * Render color gradient in colorbox as a pixel array (cairo, qt terminals)
+* "reset session" restores initial state of all linetype properties
+* postscript terminal now handles pixmaps (Bug #2644)
+
+* FIX do not clobber a datablock if its name is encountered unexpectedly
+* FIX cairo terminals:  ignore zero-size polygons
+* FIX svg terminal now correctly tracks pattern-fill color
+* FIX integer overflow/wraparound when polygon is clipped to plot border
 
 Version 6.0
 ==================

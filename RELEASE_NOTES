@@ -21,7 +21,7 @@ after downloading:
     git log
 </pre>
 
-Release Notes date:  12-Aug-2023
+Release Notes date:  10-Sep-2023
 
 		Features introduced in version 6
 		================================
@@ -129,6 +129,11 @@ For more example plots see
 	  modify internal gnuplot structures to contain a secondary sort key
 * Render color gradient in colorbox as a pixel array
 	- cairo, qt terminals
+* "reset session" restores initial state of all linetype properties
+	- previously only the colors were restored
+	- now it also reinitializes linewidth, point and dash properties
+* postscript terminal now handles pixmaps
+* svg terminal now correctly tracks pattern-fill color
 
 
 		Notes for packagers and testers
