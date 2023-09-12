@@ -1,7 +1,9 @@
 <html><head><title>Demos for gnuplot version 6.0</title>
 
-<link text="text/css" href="gnuplot_demo.css" rel="stylesheet"></head><body>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link text="text/css" href="gnuplot_demo.css" rel="stylesheet"></head>
 
+<body>
 
 <h2 align=center>Demos for gnuplot version 6.0 (pngcairo terminal)<br>
     See also the demo output for the
@@ -87,6 +89,7 @@
     <li><a href="surface2.html">surfaces 2</a></li>
     <li><a href="contours.html">contours</a></li>
     <li><a href="custom_contours.html">custom contour lines</a></li>
+    <li>٭<a href="contourfill.html">filled contours</a></li>
     <li><a href="singulr.html">singularities</a></li>
     <li><a href="hidden.html">hidden surfaces</a></li>
     <li><a href="pm3d.html">pm3d coloring</a></li>
@@ -290,7 +293,7 @@
 <tbody><tr valign="top">
 
     <td>
-    <i>This page generated July 2023</i>
+    <i>This page generated September 2023</i>
     </td>
 
     <td>
