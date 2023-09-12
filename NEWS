@@ -11,6 +11,8 @@ Changes between 6.0-rc1 and -rc2
 * Render color gradient in colorbox as a pixel array (cairo, qt terminals)
 * "reset session" restores initial state of all linetype properties
 * postscript terminal now handles pixmaps (Bug #2644)
+* New plot style "with contourfill" handles 2D and 3D contour plots with
+  discrete z-ranges indicated by solid fill colors.
 
 * FIX do not clobber a datablock if its name is encountered unexpectedly
 * FIX cairo terminals:  ignore zero-size polygons

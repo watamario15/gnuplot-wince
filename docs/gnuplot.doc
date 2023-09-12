@@ -306,8 +306,8 @@ C
 ## that selects only a slice of the full surface.  Successive plots with
 ## incremental changes to the clipping limits can be used to animate a
 ## cross-sectional cutaway view in 3D or to create a filled area contour map.
-## This is automated by a new plot style `with contourfill`, that is
-## particularly useful in 2D projection. See `set contourfill`.
+## This is automated by a new plot style `with contourfill` that is
+## particularly useful in 2D projection. See `contourfill`.
 
 #end
 D polargrid 4
@@ -483,7 +483,6 @@ D epi_data 1
 #b keyword `binvalue=avg` plots the average, rather than the sum, of binned data.
 #b `set colorbox bottom` places a horizontal color box underneath the plot
 ## rather than a vertical box on the right.
-#b `set colorbox cbtics <linestyle>` affects cbtics but not other tics.
 #b Improved rendering of intersecting pm3d surfaces - overlapping surface tiles
 ## are split into two pieces along the line of intersection so that tiles
 ## from one surface do not incorrectly protrude though the other surface.

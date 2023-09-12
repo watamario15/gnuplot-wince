@@ -44,6 +44,8 @@ For more example plots see
 	  This filter detects spikes in a function plot that would be missed or
 	  under-represented due to coarse sampling.  It adds an additional
 	  sampling point at the location of each such peak.
+	o 3D plot style `with contourfill` produces 2D or 3D surfaces with
+	  distinct z-ranges indicated by solid color fill.
 - Hulls, masks, and smoothing
 	o A cluster of 2D points can be replaced by a bounding polygon ("hull").
 	  Both convex hulls and concave hulls (χ-shapes) are supported.
@@ -125,13 +127,15 @@ For more example plots see
 	- ./configure falls back to Qt5 if the Qt6 libraries are not found
 * New configure option --enable-stable-sort
 	- Use mergesort rather than qsort if the system provides it.
-	- If neither mergesort nor glibc stabe qsort is available,
+	- If neither mergesort nor glibc stable qsort is available,
 	  modify internal gnuplot structures to contain a secondary sort key
 * Render color gradient in colorbox as a pixel array
 	- cairo, qt terminals
 * "reset session" restores initial state of all linetype properties
 	- previously only the colors were restored
 	- now it also reinitializes linewidth, point and dash properties
+* New plot style "with contourfill" generates 2D and 3D contour plots with
+  solid fill areas rather than lines.
 * postscript terminal now handles pixmaps
 * svg terminal now correctly tracks pattern-fill color
 
@@ -160,12 +164,12 @@ modes in addition to several platform-specific modes.
 1) Qt
 
    The qt terminal supports interactive display with menu-driven
-   output to png, svg or pdf.  If either Qt4 or Qt5 is detected by the
+   output to png, svg or pdf.  If either Qt6 or Qt5 is detected by the
    configure script, this will be the default terminal.  It is now the
    fastest and most full-featured interactive terminal option.
 
-   To disable this terminal or force use of Qt4 even if Qt5 is present
-	$ ./configure --with-qt=qt4
+   To disable this terminal or force use of Qt5 even if Qt6 is present
+	$ ./configure --with-qt=qt5
 	$ ./configure --without-qt
 	   
 2) Cairo/pango/wxWidgets
