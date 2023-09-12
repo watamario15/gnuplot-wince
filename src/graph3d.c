@@ -4328,7 +4328,7 @@ zslice_callback(
     if (!inrange(place,zmin,zmax))
 	return;
 
-    if (ticlevel != contourfill.tic_level)
+    if (ticlevel != contourfill.tic_level)	/* Currently always 0 */
 	return;
     if (current_slice >= MAX_ZSLICES)
 	return;
