@@ -21,7 +21,7 @@ after downloading:
     git log
 </pre>
 
-Release Notes date:  10-Sep-2023
+Release Notes date:  18-Sep-2023
 
 		Features introduced in version 6
 		================================
@@ -121,10 +121,12 @@ For more example plots see
 
 		Changes between 6.0 -rc1 and -rc2
 		=================================
-* Japanese documentation updated
-	- added missing file title-ja.tex, build dependencies for mingw
+* New plot style "with contourfill" generates 2D and 3D contour plots with
+  solid fill areas rather than lines.
 * Support building against Qt6
 	- ./configure falls back to Qt5 if the Qt6 libraries are not found
+* Japanese documentation updated
+	- added missing file title-ja.tex, build dependencies for mingw
 * New configure option --enable-stable-sort
 	- Use mergesort rather than qsort if the system provides it.
 	- If neither mergesort nor glibc stable qsort is available,
@@ -134,8 +136,6 @@ For more example plots see
 * "reset session" restores initial state of all linetype properties
 	- previously only the colors were restored
 	- now it also reinitializes linewidth, point and dash properties
-* New plot style "with contourfill" generates 2D and 3D contour plots with
-  solid fill areas rather than lines.
 * postscript terminal now handles pixmaps
 * svg terminal now correctly tracks pattern-fill color
 

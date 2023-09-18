@@ -18,6 +18,7 @@ Changes between 6.0-rc1 and -rc2
 * FIX cairo terminals:  ignore zero-size polygons
 * FIX svg terminal now correctly tracks pattern-fill color
 * FIX integer overflow/wraparound when polygon is clipped to plot border
+* FIX do not mangle variable point properties in polar mode Bug #2650
 
 Version 6.0
 ==================
