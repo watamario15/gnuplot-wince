@@ -2770,6 +2770,10 @@ C 4 weekdata_cdc
  `words("string")` returns the number of words in string. For example,
  `words(" a b c d")` returns 4.
 
+ Words must be separated by whitespace; if you need to extract individual
+ fields from a string that are separated by some other character, use
+ instead `split`.
+
  The `word` and `words` functions provide limited support for quoted strings,
  both single and double quotes can be used:
        print words("\"double quotes\" or 'single quotes'")   # 3
@@ -4145,6 +4149,12 @@ Ffigure_newsyntax
  an `if`, `else`, `do for`, or `while` condition.
  If the name of a local variable duplicates the name of a global variable,
  the global variable is shadowed until exit from the local scope.
+#TeX \newline
+ EXPERIMENTAL: As currently implemented the scope of a local variable
+ extends into functions called from the code block it was declared in;
+ this includes `call`, `load`, and function block invocation.
+ This will probably change in the future so that the scope is strictly
+ confined to the declaring code block.
 
 2 Start-up (initialization)
 ?startup
@@ -6588,6 +6598,10 @@ Ffigure_zerror
 
  In this example ARGV[1] and ARGV[2] have the full precision of a floating point
  variable.  ARG2 lost precision in being stored as a string using format "%g".
+
+ ARGC and a corresponding array ARGV[ARGC] are also available to code inside a
+ function block call.  However invocation of a function block does not create
+ string variables ARG1,... .
 3 Example
 ?call example
 ?commands call example
@@ -7350,10 +7364,12 @@ Ffigure_zerror
       gnuplot> plot $sinc(x) with lines title "sinc(x) as a function block"
 
  It is not necessary to specify a list of named arguments to a function block
- at the time it is declared. Arguments to the function passed from the command
- line can be also be accessed from inside the function block as ARGV[1] etc,
- as they would be for a `call` command.  See `ARGV`.  This allows defining a
- function block that can operate on a variable number of arguments.
+ at the time it is declared. The number and values of arguments to the function
+ passed from the command line can be be accessed from inside the function block
+ as an integer variable ARGC and a corresponding array ARGV[ARGC].  See `ARGV`.
+ This allows defining a function block that can operate on a variable number
+ of arguments.  Unlike loading a file via a `call` statement, arguments are
+ not repackaged as string variables (e.g. ARG1).
 
  Example:
       function $max << EOF
@@ -7391,6 +7407,7 @@ Ffigure_zerror
  Limitations:
 #start
 #b Data blocks and function blocks cannot be defined inside a function block.
+#b Pseudofile '-' cannot be used to read data inside a function block.
 #b These commands cannot be executed inside a function block:
 ##   `reset`, `shell`, `!<shell command>`.
 #b A `plot`, `replot`, `splot`, `refresh`, `stats`, `vfill`, or `fit` command
@@ -8948,6 +8965,7 @@ Ffigure_smooth_path
 4 special-filenames
 ?special-filenames
 ?special_filenames
+?pseudofiles
 ?commands plot datafile special-filenames
 ?plot datafile special-filenames
 ?plot special-filenames
@@ -8955,8 +8973,9 @@ Ffigure_smooth_path
 ?data special-filenames
 ?special-filenames ++
 ?special-filenames +
-?+
-?++
+?'-'
+?'+'
+?'++'
  There are a few filenames that have a special meaning:  '', '-', '+' and '++'.
 
  The empty filename '' tells gnuplot to re-use the previous input file in the
