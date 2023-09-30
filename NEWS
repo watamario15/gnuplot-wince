@@ -1,6 +1,14 @@
 Changes between 6.0-rc2 and -rc3
 ================================
 
+* partial support for replotting and mousing multiplots (finally!)
+* fixes build error for postscript terminal when libgd and cairo are not present
+* strip trailing CR from function blocks read from a dos file   Bug #2653
+* use 64-bit integers for iteration
+* "unset pointintervalbox" disables the box rather than setting it to default size
+* keyentry '...' can be used to place a secondary title in the key
+* fix use of stacked histograms with variable number of data columns
+
 Changes between 6.0-rc1 and -rc2
 ================================
 * Japanese documentation updated

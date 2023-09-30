@@ -1,4 +1,4 @@
-		Gnuplot Version 6.0 rc2 Release Notes
+		Gnuplot Version 6.0 rc3 Release Notes
 		=====================================
 
 Version 6.0 is the start of a new stable release series.
@@ -21,7 +21,7 @@ after downloading:
     git log
 </pre>
 
-Release Notes date:  18-Sep-2023
+Release Notes date:  13-Nov-2023
 
 		Features introduced in version 6
 		================================
@@ -139,6 +139,23 @@ For more example plots see
 * postscript terminal now handles pixmaps
 * svg terminal now correctly tracks pattern-fill color
 
+		Changes between 6.0-rc2 and -rc3
+		================================
+
+- Replotting and mousing multiplots
+	o new commands "remultiplot", "set mouse multiplot"
+	o command sequence to regenerate full multiplot is saved to a datablock
+- Additional keyentry options to construct custom keys
+	o keyentry "text" can be used to place a secondary title in the key
+- Minor fixes
+	o correct build of postscript terminal when libgd and cairo are not present
+	o strip trailing CR from function blocks read from a dos file
+	o use 64-bit integers for iteration
+	o "unset pointintervalbox" disables the box rather than setting it to default size
+	o setting minitic scale to 0 does not disable the corresponding grid lines
+	o use of stacked histograms with variable number of data columns
+
+
 
 		Notes for packagers and testers
 		===============================
@@ -239,7 +256,7 @@ file of the source package; the short version for linux/unix-like
 systems is to unpack the tarball and then
 <PRE>
 build it:
-      cd gnuplot-6.0.rc2 ; ./configure ; make
+      cd gnuplot-6.0.rc3 ; ./configure ; make
 test it:
       make check
 install it:
