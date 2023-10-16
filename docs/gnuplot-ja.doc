@@ -1,4 +1,4 @@
-C corresponding original gnuplot.doc for gnuplot-6.0.0rc1
+C corresponding original gnuplot.doc for gnuplot-6.0.0rc2
 C
 C Copyright (C) 1986 - 1993, 1998, 1999, 2000, 2001, 2004   Thomas Williams, Colin Kelley et al.
 C
@@ -363,6 +363,13 @@ C 行が長いのは、できればなんとかしたい
 ## hull と領域塗り潰しのパスに沿った平滑化を組み合わせることで、「膨ら
 ## んだ領域」グラフの作成が可能になります。これは例えば複数のデータのか
 ## たまりが重なっているものの広さを示します。以下参照: `concavehull`。
+#b 3 次元描画スタイル `with pm3d` でオプション修飾子 `zclip [zmin:zmax]`
+## が使えて、これは曲面全体のひとつの断面のみを選択します。クリッピング
+## の境界値を増加させて連続描画を行うことで、3 次元では断面切り出しアニ
+## メーションを見るのに使えますし、間を塗り潰した等高線図を作成するのに
+## 使えます。これは、新しい描画スタイル `with contourfill` で自動化でき、
+## それは 2 次元射影で特に有用です。以下参照: `contourfill`。
+
 #end
 D polargrid 4
 DB
@@ -371,6 +378,8 @@ D sectors 4
 DB
 D sharpen 1
 D iris 2
+DB
+D contourfill 4
 
 3 凸包とマスクと平滑化 (Hulls, masks, and smoothing)
 ?new hulls
@@ -379,9 +388,9 @@ D iris 2
 ## `convexhull`。その境界の曲線を滑らかにするには、
 ## "convexhull smooth path with filledcurves" を使って塗り潰し領域とし
 ## て描画することでできます。以下参照: `convexhull`。
-#b 試験的なフィルタ `concavehull` は、凸とは限らない、凹の度合を制御す
-## る特性長パラメータで決定されるχ-形状の、多角形のデータ境界を生成し
-## ます。これはデータ点の回りの本質的なしみを描画します。以下参照:
+#b フィルタ `concavehull` は、凸とは限らない、凹の度合を制御する特性長
+## パラメータで決定されるχ-形状の、多角形のデータ境界を生成します。こ
+## れはデータ点の回りの本質的なしみを描画します。以下参照:
 ## `concavehull`。
 #b pm3d 曲面や image 描画の選択した一部分のみを表示するようマスクするの
 ## に、凸包 (convex hull) や他の多角形 (polygon) を使用できます。新しい
@@ -507,6 +516,7 @@ D viridis 1
 ## すること
 #b マウスを使って複数のグラフに沿った値を同時に追跡すること
 #end
+D watchpoints 2
 
 3 週曜日のサポート (Week-date time support)
 ?new week-date time
@@ -539,7 +549,6 @@ D epi_data 1
 #b bin (箱) 用の、合計でなく平均を描画するキーワード `binvalue=avg`
 #b `set colorbox bottom` は、垂直なカラーボックスを右に配置する代わりに
 ## 水平なカラーボックスをグラフの下に配置します。
-#b cbtics 以外の軸には影響しない `set colorbox cbtics <linestyle>`
 #b 交差する pm3d 曲面のレンダリングの改良 - 重なる曲面のタイルを、交差
 ## 曲線に沿って 2 つの部分に分割し、一方の曲面のタイルが他方の曲面を通
 ## って不正に突き出てしまうことがないようにします。
@@ -2322,7 +2331,7 @@ C C 4 weekdata_cdc
  以下参照: `splot voxel-grids`, `vgrid`。
 @end table
 
-4 整数変換関数 (integer conversion functions): int floor ceil round
+4 整数変換関数 (int floor ceil round) (integer conversion functions)
 ?integer conversion
 ?integer
 ?precision
@@ -4669,6 +4678,7 @@ Ffigure_watchpoints
       set y2tics format "%.2f<C2><B0>"
       set style watchpoint labels point pt 6
       plot FOO axes x1y2 watch mouse
+D watchpoints 2
 
 1 描画スタイル (Plotting styles)
 ?plotting styles
@@ -4798,15 +4808,15 @@ Ffigure_boxerrorbars
  3 次元グラフでは、スタイル `boxes` は与えられた x, y 座標を中心とし、
  xy 平面 (z=0) から与えられた z 座標まで伸ばした直方体の箱を書きます。
  x 方向の箱の幅は、別の入力列か `set boxwidth` で指定でき、y 方向の箱の
- 奥行きは、`set boxdepth` で制御できます。箱は、2 次元描画でのように、
- 自動的にはくっつくように引き伸ばされません。
+ 奥行きは、`set boxdepth` で制御できます。箱は、自動的にはくっつくよう
+ に引き伸ばされません。
 3 2 次元の boxes (2D boxes)
 ?style boxes 2D
 ?boxes 2D
 
  `plot with boxes` は、基本的に 2 列、または 3 列のデータを使用します。
- さらに入力列を追加すると、それは variable 行や塗り潰し色の情報として使
- 用します。以下参照: `rgbcolor variable`。
+ さらに入力列を追加すると、それは、可変線色 (variable line color) や塗
+ り潰し色の情報として使用します。以下参照: `rgbcolor variable`。
 
       2 列:  x  y
       3 列:  x  y  x_width
@@ -4869,9 +4879,9 @@ Ffigure_3Dboxes
  天井をを持つ本当の箱に変更できます。以下参照: `set boxdepth`。
 
  3 次元の箱は、曲面ではなく pm3d 長方形として処理しています。よって、表
- 裏の描画順は、`set hidden3d` の影響を受けません。同様に、各箱面に境界
- 線を持たせたい場合は、`set style fill border` でなく `set pm3d border`
- を使ってください。以下参照: `set pm3d`。
+ 裏の描画順は、`set hidden3d` の影響を受けません。以下参照: `set pm3d`。
+ gnuplot バージョン 6 は、箱の端はグラフの fill style の境界色で色付け
+ します。これはバージョン 5 とは異なる変更です。
  最良の結果を得るには、`set pm3d depthorder base` と `set pm3d lighting`
  を組み合わせてください。
 
@@ -5081,6 +5091,51 @@ Ffigure_piechart
      0    0    5  230   360    5
      e
 
+2 contourfill
+?plotting styles contourfill
+?style contourfill
+?with contourfill
+?contourfill
+Ffigure_contourfill
+ contourfill は、3 次元描画スタイルで、pm3d 曲面を z の等高線に沿って切
+ った断片の色付けに使います。これは、2 次元射影 (`set view map`) で、等
+ 高線の間を単色で塗り潰した 2 次元の等高線グラフを作成するのに使えます。
+ 各断片の境界と色の割り当ては、いずれも `set contourfill` で制御できま
+ す。以下も参照: `pm3d`, `zclip`。
+
+ この描画スタイルは、`set contours` と組み合わせて、その断片を切り分け
+ る等高線を重ね描きすることができます。`set contourfill` の断片の境界を
+ `set cntrparam` の等高線境界とを合わせるように注意してください。
+
+      # ztics で定義される断片境界
+      # 断片の z の中央値に割り当てられるパレットで色付け
+      set pm3d border retrace
+      set contourfill ztics
+      set ztics -20, 5, 20
+      set contour
+      set cntrparam cubic levels increment -20, 5, 20
+      set cntrlabel onecolor
+      set view map
+      splot g(x,y) with contourfill, g(x,y) with lines nosurface
+
+2 dots
+?plotting styles dots
+?style dots
+?with dots
+?dots
+Ffigure_dots
+ `dots` スタイルは各点に小さなドットを描画します。これはたくさんの点か
+ らなる散布図の描画に便利でしょう。2 次元描画では 1 列、または 2 列の入
+ 力データが、3 次元描画では 3 列のデータが必要です。
+
+ 出力形式によっては (post, pdf など)、ドットの大きさは linewidth を変更
+ することで制御できることもあります。
+
+      1 列:  y         # x は行番号
+      2 列:  x  y
+      3 列:  x  y  z   # 3D のみ (splot)
+
+#TeX \newpage
 2 ellipses
 ?plotting styles ellipses
 ?style ellipses
@@ -5132,23 +5187,6 @@ Ffigure_ellipses
      plot 'data' using 1:2:3:4:(0):0 with ellipses
 
  以下も参照: `set object ellipse`, `set style ellipse`, `fillstyle`。
-
-2 dots
-?plotting styles dots
-?style dots
-?with dots
-?dots
-Ffigure_dots
- `dots` スタイルは各点に小さなドットを描画します。これはたくさんの点か
- らなる散布図の描画に便利でしょう。2 次元描画では 1 列、または 2 列の入
- 力データが、3 次元描画では 3 列のデータが必要です。
-
- 出力形式によっては (post, pdf など)、ドットの大きさは linewidth を変更
- することで制御できることもあります。
-
-      1 列:  y         # x は行番号
-      2 列:  x  y
-      3 列:  x  y  z   # 3D のみ (splot)
 
 2 filledcurves
 ?plotting styles filledcurves
@@ -5793,11 +5831,11 @@ Ffigure_lines
  す (以下参照: `rgbcolor variable`)。
 
  2 次元 ("using" 指定なし) の場合
-      1 列:  y     # 行番号による暗黙の x
-      2 列:  x y
+    1 列:  y     # 行番号による暗黙の x
+    2 列:  x y
  3 次元 ("using" 指定なし) の場合
-      1 列:  z     # x は暗黙の行番号、y は index から
-      3 列:  x y z
+    1 列:  z     # x は暗黙の行番号、y は index から
+    3 列:  x y z
 
  以下も参照: `linetypes`, `linewidth`, `linestyle`。
 2 linespoints
@@ -5902,16 +5940,9 @@ Ffigure_parallel
      plot $DATA using col1{:varcol1} {at <xpos>} {<line properties}, \
           $DATA using col2, ...
 
- 変更: gnuplot バージョン 5.4 では、描画スタイル parallelaxes の書式を
- 変更しています。改良された書式では、平行座標軸数の制限をなくすことが可
- 能です。
-
-      gnuplot 5.2:   plot $DATA using 1:2:3:4:5 with parallelaxes
-      gnuplot 5.4:   plot for [col=1:5] $DATA using col with parallelaxes
-
- 新しい書式では、以下の例に見られるように、平行座標軸の x 軸位置での明
- 示的な配置も可能になっています。明示的な x 座標指定がなければ、N 番目
- の軸は x=N の場所に置かれます。
+ キーワード `at` で、以下の例に見られるように、平行座標軸の x 軸位置で
+ の明示的な配置も可能になっています。明示的な x 座標指定がなければ、N
+ 番目の軸は x=N の場所に置かれます。
 
       array xpos[5] = [1, 5, 6, 7, 11, 12]
       plot for [col=1:5] $DATA using col with parallelaxes at xpos[col]
@@ -5954,11 +5985,8 @@ Ffigure_points
  `points` スタイルは各点に小さな記号を表示します。すべての記号のデフォ
  ルトの大きさを変更するにはコマンド `set pointsize` を使います。デフォ
  ルトの点種は、線種と同じものになります。以下参照: `linetypes`。plot コ
- マンドに `using` 指定がない場合は、入力データ列は暗黙のうちに
-      x y pointsize pointtype color
- の順で解釈されます。最初の 2 つ (x, y) の後ろのすべての列は省略可能で、
- それらは追加の描画属性 `pointsize variable`, `pointtype variable` 等に
- 対応します。
+ マンドに `using` 指定がない場合は、入力データ列を暗黙のうちに、以下で
+ 説明するように `x y pointsize pointtype color` の順で解釈します。
 
  最初の 8 つの点種は、すべての出力形式で共通ですが、より多くの点種を個
  別にサポートする出力形式もあります。現在の出力形式の設定でどのような点
@@ -5972,22 +6000,37 @@ Ffigure_points
       plot f(x) with points pt "#"
       plot d(x) with points pt "\U+2299"
 
+3 可変点属性 (variable point properties)
 ?points variable
 ?with points variable
 =variable
 ?variable
 ?pointtype variable
 ?pointsize variable
- plot コマンド上でキーワード `pointtype`, `pointsize`, `linecolor` を使
- う際、番号の代わりにキーワード `variable` を追加することができます。こ
- の場合、各点の対応する属性値を入力データの追加列から取得します。可変
- (variable) pointsize 値は、常に `using` 指定で与えられる最初の追加列か
- ら取り、可変 color 値は、常に最後の追加列から取ります。以下参照:
- `colorspec`。各点に対して 3 つの属性をすべて指定する場合は、入力データ
- 列指定の順番は以下のようになります。
+ 点 (point) 記号を含む描画スタイルでは、オプションとして追加データ列を
+ `using` 指定で受け取ることでその点の見た目を制御することができます。こ
+ れは、plot コマンド上でキーワード `pointtype`, `pointsize`, `linecolor`
+ を使う際に、番号の代わりにキーワード `variable` を追加することで指示し
+ ます。
+ 描画スタイル `with labels` でも、可変文字列回転角を受け取ることができ
+ ます。
+ 例:
+      # 入力データは、列 1:2 で [x,y] を与え
+      # 点のサイズは 5 列目で与え
+      # RGB 色は 4 列目で 16 進数値として与え
+      # すべての点は pointtype 7 を使用
+        plot DATA using 1:2:5:4 with points lc rgb variable ps variable pt 7
 
-      plot DATA using x:y:pointsize:pointtype:color \
-           with points lc variable pt variable ps variable
+ 2 つ以上の可変 (variable) 属性を指定すると、plot コマンド内のキーワー
+ ドの順とは無関係に、以下の順で列を解釈します。
+
+     textrotation : pointsize : pointtype : color
+     (文字列の回転角) : (点のサイズ) : (点の種類) : (色)
+
+ よって、上の例では、"lc rgb variable" は plot コマンドの最初に現れてい
+ ますが、色は `using` 指定の最後の列 (4) から取ります。可変色 (variable
+ color) 指定は、常に最後の追加列から取ります。可変色を指定するには、い
+ くつかの方法があります。以下参照: `colorspec`。
 
  注意: 「ユーザ定義変数」の方の variable に関する情報については、以下
  参照: `variables`。
@@ -6054,6 +6097,8 @@ Ffigure_polygons
 ?style rgbimage
 ?with rgbimage
  以下参照: `image`。
+
+#TeX \newpage
 2 扇片 (sectors)
 ?plotting styles sectors
 ?with sectors
@@ -6247,6 +6292,7 @@ Ffigure_vectors
  2 次元描画スタイルの以下も参照: `with arrows`。これは、各矢印を
  x:y:length:angle の形式で指定する以外は `with vectors` と同じです。
 
+#TeX \newpage
 2 xerrorbars
 ?plotting styles xerrorbars
 ?style xerrorbars
@@ -8521,8 +8567,8 @@ Ffigure_convex_hull
 ?filters concavehull
 ?concavehull
 
- 試験段階 (実装の詳細は将来のリリースで変更するかもしれません)。あなた
- の gnuplot が --enable-chi-shapes 付きでビルドされた場合のみ利用可能。
+ あなたの gnuplot が --enable-chi-shapes 付きでビルドされた場合のみ利用
+ 可能。
 
  凹包 (concavehull) は、描画スタイルではありません。これは、入力データ
  点の境界多角形「閉包」(hull) を見つけるフィルタの一つで、これは、元の
@@ -11062,11 +11108,15 @@ Ffigure_colornames
 ?contour
 ?contours
 ?nocontour
- コマンド `set contour` で曲面の等高線描画が可能になります。このオプシ
- ョンは `splot` のみで有効です。これは格子状データ (grid data) を必要と
- します。詳細は以下参照: `grid_data`。非格子状データに等高線が必要な場
- 合は、適切な格子状データを生成するために `set dgrid3d` を使用すること
- ができます。
+ コマンド `set contour` で 3 次元曲面に等高線を置くことができます。この
+ オプションは `splot` でのみ有効です。これは、格子状データ (grid data)
+ を必要とします。すなわち、一つの y-孤立線に対するすべての点が並べられ、
+ その次に次の y-孤立線に対するすべての点が並び、以下同様に続くデータの
+ ファイルです。y-孤立線同士を分離するのは単一の空行 (空白以外の文字を一
+ 切含まない行) です。詳細は以下参照: `grid_data`。
+
+ データが格子状になっていない場合、`set dgrid3d` を使って最初に適切な格
+ 子を生成し、その格子にデータを当てはめることができます。
 
  書式:
        set contour {base | surface | both}
@@ -11082,27 +11132,10 @@ Ffigure_colornames
  `set cntrparam`。等高線のラベルの制御に関しては、以下参照:
  `set cntrlabel`。
 
- 曲面は、等高線のみのグラフを与えるためにスイッチオフにすることが可能で
- す (以下参照: `unset surface`)。そのグラフをスクリーン全体に拡大するた
- めに `set size` を使用することは可能ですが、等高線情報をデータブロック
- に書き出し、それを 2 次元データファイル描画として再読み込みすることで
- さらなる出力書式に関する制御を得ることができます:
-
-       unset surface
-       set contour
-       set cntrparam ...
-       set table $datablock
-       splot ...
-       unset table
-       # 等高線の情報は現在は $datablock 内に
-       set term <whatever>
-       plot $datablock
-
- 等高線を描くために、データは「格子状データ (grid data)」として組織化す
- べきです。そのようなファイルでは一つの y-孤立線に対するすべての点が順
- に並び、そして次の y-孤立線に対するすべての点が並び、以下同様です。単
- 一の空行 (空白のスペースや改行や復帰文字以外は何の文字も含まない行) が
- 一つの y-孤立線を次のものと分離します。 
+ このオプションは、線やラベルを配置するもので、曲面自身のその他の見た目
+ は変えないことに注意してください。曲面の色付けを、等高線で区切られた領
+ 域が他と区別できるような色に割り当てたい場合は、代わりに描画スタイル
+ contourfill を使用してくだささい。以下参照: `contourfill`。
 
  `set contour` が有効な場合、`splot with <style>` で points, lines,
  impulses, labels 等の描画要素を等高線に沿って配置できます。`with pm3d`
@@ -11111,14 +11144,31 @@ Ffigure_colornames
  ルなどのその他の描画要素も混ぜたい場合は、splot コマンド内のその命令の
  後ろにキーワード `nocontours` を追加しないといけません。
 
- 以下も参照: `splot datafile`。
+ 曲面をスイッチオフ (以下参照: `unset surface`) にして、等高線のみのグ
+ ラフにすることも可能です。等高線の 2 次元射影とオプションのラベルは以
+ 下のようにして生成できます:
 
+      set view map
+      splot DATA with lines nosurface, DATA with labels
+
+ 以前のバージョンの gnuplot では、以下のように、代わりとなる多段階の方
+ 法を使って 3 次元の等高線をファイルやデータブロックに保存し、その後で
+ それを 2 次元の plot コマンドを使用してそれを描画していました。
+
+       set contour
+       set table $datablock
+       splot DATA with lines nosurface
+       unset table
+       # 等高線は $datablock に、1 つの等高線が 1 つの index で
+       plot for [level=0:*] $datablock index level with lines
+
+ 以下も参照: `splot datafile`。また、
  ^ <a href="http://www.gnuplot.info/demo/contours.html">
  等高線のデモ (contours.dem)
  ^ </a>
  と
  ^ <a href="http://www.gnuplot.info/demo/discrete.html">
- ユーザ定義レベルを持つ等高線のデモ (discrete.dem)
+ 等高線レベルのユーザ定義のデモ (discrete.dem)
  ^ </a>
  も参照。
 3 グラフ角の支柱 (cornerpoles)
@@ -11127,6 +11177,38 @@ Ffigure_colornames
 ?cornerpoles
  デフォルトで、splot は 3 次元曲面のそれぞれの角から床面への鉛直線を描
  画します。これらの鉛直線は、`unset cornerpoles` で消すことができます。
+3 等高線間の塗り潰し (contourfill)
+?commands set contourfill
+?commands show contourfill
+?set contourfill
+?show contourfill
+ 3 次元描画スタイル `with contourfill` は、1 つの pm3d 曲面を、z 軸に垂
+ 直な平面群で区切られる断片に切り分けます。コマンド `set contourfill`
+ は、区切る平面群の配置と個々の断片に割り当てる色を制御します。
+
+ 書式:
+      set contourfill auto N          # zrange を N 等分した断片に
+      set contourfill ztics           # z 軸の各主目盛りで切り分け
+      set contourfill cbtics          # cb 軸の各主目盛りで切り分け
+      set contourfill {palette | firstlinetype N}
+
+ デフォルトは `set contourfill auto 5 palette` で、これは現在の z 軸の
+ 範囲を 5 等分し (6 つの平面で区切る)、各断片にその z の中点に対応する
+ パレットの色を割り当てます。
+
+ オプション `ztics`, `cbtics` は、zrange の分割を、その軸の主目盛りの位
+ 置で行います。例えば、z=2.5, z=7, z=10 に指定して切り分けるには、以下
+ のコマンドを使用します。
+      set ztics add ("floor" 2.5, "boundary X" 7, "ceiling" 10)
+      set contourfill ztics
+
+ 断片の色付けにパレットを使いたくない場合は、任意連続する線種の範囲を選
+ 択し、それらに望む色の列を割り当てることができます。
+      set for [i=101:110] linetype i lc mycolor[i]
+      set contourfill firstlinetype 101
+ `set contourfill palette` でパレットによる色付けに復帰できます。
+D contourfill 3
+
 3 点線/破線設定 (dashtype)
 ?commands set dashtype
 ?commands show dashtype
@@ -13009,7 +13091,7 @@ Ffigure_multiple_keys
  を再定義することを可能にします。このコマンドのオプションは、
  "set style line" のものと全く同じです。ラインスタイルと違うところは、
  `set linetype` による再定義は永続的なことで、これは `reset` の影響を受
- けません。
+ けません。しかし、`reset session` で初期線種の属性を復帰します。
 
  例えば、線種 1 と 2 を以下のように再定義してみます:
 
@@ -14793,16 +14875,52 @@ Ffigure_gradient
 
  以下も参照: `set palette`, `set cbrange`, `set colorbox`。そしてデモフ
  ァイル `demo/pm3d.dem` も参考になるでしょう。
-4 暗黙的な pm3d (implicit)
-?pm3d implicit
+
+4 with pm3d (明示的な pm3d; pm3d explicit)
 ?pm3d explicit
 ?with pm3d
 ?splot with pm3d
- splot コマンドで `with pm3d` を指定した場合、またはデータや関数描画ス
- タイル (`style`) が大域的に pm3d にセットされている場合、あるいは、
- pm3d モードが `set pm3d implicit` となっている場合は、pm3d のカラー曲
- 面を描画します。後の 2 つの場合は、plot コマンドで指定したスタイルで生
- 成する網目に pm3d 曲面を追加する形で描画します。例えば、
+?plotting styles pm3d
+?splot with pm3d zclip
+?pm3d zclip
+?zclip
+
+ 書式
+      splot DATA using (x):(y):(z){:(color)} with pm3d
+                 {fs|fillstyle <fillstyle>} {fc|fillcolor <colorspec>}
+                 {zclip [zmin:zmax]}
+
+ すべての pm3d 曲面の描画属性は、`set pm3d` を使って制御できます。デフ
+ ォルトでは、曲面全体を四辺形の格子として描画し、各格子は z 座標に割り
+ 当てられるパレット色で色付けします。4 番目の入力列を与えると、パレット
+ の割り当ては z の値でなくその値を使用します。以下参照:
+ `pm3d fillcolor`, `pm3d color_assignment`。
+
+ `set pm3d implicit` が有効な状態で `with pm3d` 以外の描画スタイルを使
+ 用するのではなく、plot コマンドで明示的に `with pm3d` を使用する場合、
+ 描画オプションを追加することが可能です。これにより、同じグラフ上で、違
+ う曲面に別々の色付けの仕組みを使うことが可能になります。
+
+ 試験段階: このバージョンの gnuplot は、オプション `zclip` を導入してい
+ て、それは z の値の境界で曲面を滑らかな曲面を生成するようにクリッピン
+ グします。以下の例は、2 色の 3 次元曲面の頂上の部分を徐々に消していく
+ アニメーションを表示します。
+      set style line 101 lc "gray"
+      set style line 102 lc "blue"
+      set pm3d depthorder
+      do for [i=0:N] {
+          splot f(x,y) with pm3d fillcolor ls 101 zclip [* : zmax-(i*delta)]
+          pause 0.2  # アニメーションフレーム間隔は 1/5 秒
+      }
+
+4 暗黙的な pm3d (pm3d implicit)
+?pm3d implicit
+
+ splot コマンドで明示的に `with pm3d` を指定した場合、またはデータや関
+ 数描画スタイル (`style`) が大域的に pm3d にセットされている場合、ある
+ いは、pm3d モードが `set pm3d implicit` となっている場合は、pm3d のカ
+ ラー曲面を描画します。後の 2 つの場合は、plot コマンドで指定したスタイ
+ ルで生成する網目に pm3d 曲面を追加する形で描画します。例えば、
        splot 'fred.dat' with lines, 'lola.dat' with lines
  は、各データ集合毎に折れ線による網目と pm3d 曲面の両方を描画します。
  オプション `explicit` (明示的) が ON (または `implicit` が OFF) の場合
