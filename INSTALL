@@ -304,6 +304,12 @@ Ubuntu
 	make
 	sudo make install
 
+  Debian packages required to configure with Qt5:
+	qtbase5-dev
+	qtbase5-dev-tools
+	qttools5-dev-tools
+	libqt5svg5-dev
+
   Add the below to ~/.profile
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
