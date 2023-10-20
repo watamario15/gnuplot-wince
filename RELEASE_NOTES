@@ -1,10 +1,9 @@
-		Gnuplot Version 5.4.9 Release Notes
+		Gnuplot Version 5.4.10 Release Notes
 		===================================
 
-The 5.4.9 patchlevel release contains various non-critical bug fixes
-to the current stable gnuplot version 5.4.
-It also includes a change to the configuration system to support
-linking against Qt6 (previous releases checked only for Qt5 or Qt4).  
+The 5.4.10 patchlevel release repairs a regression in 5.4.9 that caused
+a build failure in the postscript terminal if neither cairo nor libgd
+support was configured.
 
 This is probably the final update to version 5.4,
 as a full release of version 6 is expected by the end of this year.
@@ -15,7 +14,13 @@ after downloading:
 
 	git clone -b branch-5-4-stable git://git.code.sf.net/p/gnuplot/gnuplot-main
 
-Release Notes date:  04-Sep-2023
+Release Notes date:  20-Oct-2023
+
+Changes in 5.4.10
+=================
+* FIX	 postscript: build failed in 5.4.9 if neither gd nor cairo libraries present
+* FIX	 data-dependent variable point properties in polar plots
+* CHANGE use 64-bit integers for iteration (allows iteration over dates)
 
 Changes in 5.4.9
 ================
@@ -356,7 +361,7 @@ Installation instructions are available in the source itself; the short
 version for linux/unix-like systems is to unpack the tarball and then
 <PRE>
 build it:
-      cd gnuplot-5.4.6 ; ./configure ; make
+      cd gnuplot-5.4.10 ; ./configure ; make
 test it:
       make check
 install it:
@@ -378,8 +383,6 @@ on SourceForge:
 Development
 -----------
 Gnuplot development is ongoing. The development branch contains preliminary
-implementations of new features.  The current development version is 5.5
-(odd minor number) and will eventually be released as version 5.6 or 6.0
-(even minor number).  Bugfixes to version 5.4 will appear in patchlevel
-releases 5.4.1, 5.4.2, etc., approximately twice a year or as needed
-to correct a serious problem.
+implementations of new features.  The current development branch version is 6.
+Bugfixes to version 5.4 will appear in patchlevel releases 5.4.1, 5.4.2, etc.,
+approximately twice a year or as needed to correct a serious problem.

@@ -1,3 +1,10 @@
+Changes in 5.4.10
+=================
+* FIX	 postscript: build failed in 5.4.9 if neither gd nor cairo libraries present
+* FIX	 data-dependent variable point properties in polar plots
+* CHANGE use 64-bit integers for iteration (allows iteration over dates)
+
+
 Changes in 5.4.9
 ================
 * NEW	 qt:  support building with Qt6
