@@ -403,7 +403,7 @@ clean-local:
 	$(AM_V_at)rm -f pdf_figures
 	$(AM_V_at)rm -rf ja
 
-distclean: clean
+distclean-local:
 	-rm -f $(BUILT_SOURCES)
 
 #the end
