@@ -49,18 +49,19 @@
 #include "setshow.h"
 #include "util.h"
 
-/* Support for multiplot playback */
-TBOOLEAN multiplot_playback = FALSE;	/* TRUE while inside "remultiplot" playback */
-static t_value multiplot_udv = {
-	.type = DATABLOCK,
-	.v.data_array = NULL
-};
-
 /* Local prototypes */
 static void mp_layout_size_and_offset(void);
 static void mp_layout_margins_and_spacing(void);
 static void mp_layout_set_margin_or_spacing(t_position *);
 static void init_multiplot_datablock(void);
+
+/* Support for multiplot playback */
+TBOOLEAN multiplot_playback = FALSE;	/* TRUE while inside "remultiplot" playback */
+TBOOLEAN multiplot_mouse = FALSE;	/* use "remultiplot" for "replot" while mousing */
+static t_value multiplot_udv = {
+	.type = DATABLOCK,
+	.v.data_array = NULL
+};
 
 enum set_multiplot_id {
     S_MULTIPLOT_LAYOUT,

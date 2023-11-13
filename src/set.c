@@ -65,6 +65,7 @@
 #include <ctype.h>
 #ifdef USE_MOUSE
 #include "mouse.h"
+#include "multiplot.h"
 #endif
 #include "encoding.h"
 #include "voxelgrid.h"
@@ -3252,6 +3253,12 @@ set_mouse()
 	    }
 	    mouse_setting.xmzoom_factor = x;
 	    mouse_setting.ymzoom_factor = y;
+	} else if (almost_equals(c_token, "multi$plot")) {
+	    c_token++;
+	    multiplot_mouse = TRUE;
+	} else if (almost_equals(c_token, "nomulti$plot")) {
+	    c_token++;
+	    multiplot_mouse = FALSE;
 	} else {
 	    if (!END_OF_COMMAND)
     		int_error(c_token, "wrong option");

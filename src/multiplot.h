@@ -8,3 +8,4 @@ void multiplot_reset_after_error(void);
 int multiplot_current_panel(void);
 
 extern TBOOLEAN multiplot_playback;	/* TRUE while inside "remultiplot" playback */
+extern TBOOLEAN multiplot_mouse;	/* use "remultiplot" for "replot" while mousing */
