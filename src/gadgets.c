@@ -62,6 +62,9 @@ BoundingBox plot_bounds;
 /* The bounding box for 3D plots prior to applying view transformations */
 BoundingBox page_bounds;
 
+/* The region within a multiplot belonging to the current plot */
+BoundingBox active_bounds;
+
 /* The bounding box for the entire drawable area  of current terminal */
 BoundingBox canvas;
 
@@ -1257,4 +1260,16 @@ construct_2D_mask_set( struct coordinate *points, int p_count )
 	if (polygon < end_of_list)
 	    polygon++;
     }
+}
+
+/* Calculate the region on the canvas used by the current plot.
+ * This can be saved to guide subsequent mousing.
+ */
+void
+update_active_region(void)
+{
+    active_bounds.xleft = term->xmax * xoffset;
+    active_bounds.xright = term->xmax * (xoffset + xsize);
+    active_bounds.ybot = term->ymax * yoffset;
+    active_bounds.ytop = term->ymax * (yoffset + ysize);
 }
