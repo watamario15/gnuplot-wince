@@ -2541,12 +2541,13 @@ replot_command()
 void
 reread_command()
 {
-    FILE *fp = lf_top();
-    if (evaluate_inside_functionblock)
-	int_error(NO_CARET, "reread command not possible in a function block");
+    FILE *fp;
+    c_token++;
+    if (evaluate_inside_functionblock || multiplot || multiplot_playback)
+	int_error(NO_CARET, "reread command not possible here");
+    fp = lf_top();
     if (fp != (FILE *) NULL)
 	rewind(fp);
-    c_token++;
 }
 
 #ifdef USE_FUNCTIONBLOCKS
