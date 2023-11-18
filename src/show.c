@@ -67,7 +67,6 @@
 #include "watch.h"
 #ifdef USE_MOUSE
 # include "mouse.h"
-# include "multiplot.h"
 #endif
 
 #include "color.h"
@@ -3309,8 +3308,6 @@ show_mouse()
 	    mouse_setting.warp_pointer ? "on" : "off");
 	fprintf(stderr, "\tcommunication commands will %sbe shown\n",
 	    mouse_setting.verbose ? "" : "not ");
-	fprintf(stderr, "\tremultiplot will %sbe substituted for replot while mousing\n",
-	    multiplot_mouse ? "" : "not ");
     } else {
 	fprintf(stderr, "\tmouse is off\n");
     }

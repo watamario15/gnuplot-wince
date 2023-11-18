@@ -57,7 +57,6 @@ static void init_multiplot_datablock(void);
 
 /* Support for multiplot playback */
 TBOOLEAN multiplot_playback = FALSE;	/* TRUE while inside "remultiplot" playback */
-TBOOLEAN multiplot_mouse = FALSE;	/* use "remultiplot" for "replot" while mousing */
 static t_value multiplot_udv = {
 	.type = DATABLOCK,
 	.v.data_array = NULL

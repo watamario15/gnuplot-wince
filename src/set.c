@@ -3253,15 +3253,13 @@ set_mouse()
 	    }
 	    mouse_setting.xmzoom_factor = x;
 	    mouse_setting.ymzoom_factor = y;
-	} else if (almost_equals(c_token, "multi$plot")) {
+	} else if (almost_equals(c_token, "multi$plot")
+		|| almost_equals(c_token, "nomulti$plot")) {
+	    /* Introduced in 6.0rc3 but discarded in 6.0 */
 	    c_token++;
-	    multiplot_mouse = TRUE;
-	} else if (almost_equals(c_token, "nomulti$plot")) {
-	    c_token++;
-	    multiplot_mouse = FALSE;
 	} else {
 	    if (!END_OF_COMMAND)
-    		int_error(c_token, "wrong option");
+    		int_warn(c_token++, "unrecognized option");
 	    break;
 	}
     }

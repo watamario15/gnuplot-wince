@@ -608,13 +608,8 @@ do_string_replot(const char *s)
 {
     do_string(s);
 
-    /* EXPERIMENTAL
-     * This is under the control of "set mouse multiplot".
-     * The intent is that it will always be on in the future if/when
-     * the implementation is stable.
-     */
-    if (multiplot_mouse
-    && (last_plot_was_multiplot && !multiplot && !replot_disabled)) {
+    /* EXPERIMENTAL */
+    if (last_plot_was_multiplot && !multiplot && !replot_disabled) {
 	replay_multiplot();
 	return;
     }
