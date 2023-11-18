@@ -2541,6 +2541,7 @@ replot_command()
 void
 reread_command()
 {
+#ifdef BACKWARD_COMPATIBILITY
     FILE *fp;
     c_token++;
     if (evaluate_inside_functionblock || multiplot || multiplot_playback)
@@ -2548,6 +2549,9 @@ reread_command()
     fp = lf_top();
     if (fp != (FILE *) NULL)
 	rewind(fp);
+#else
+    int_error(c_token, "deprecated command");
+#endif
 }
 
 #ifdef USE_FUNCTIONBLOCKS

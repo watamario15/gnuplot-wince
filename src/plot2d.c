@@ -2570,12 +2570,14 @@ eval_plots()
 			/* Jan 2022: same as filter "zsort" */
 			this_plot->plot_filter = FILTER_ZSORT;
 			break;
+#ifdef BACKWARD_COMPATIBILITY
 		    case SMOOTH_SMOOTH_HULL:
 			/* deprecated synonym for "convexhull smooth path" */
 			this_plot->plot_smooth = SMOOTH_PATH;
 			this_plot->plot_filter = FILTER_CONVEX_HULL;
 			this_plot->plot_style = LINES;	/* can override later */
 			break;
+#endif
 		    case SMOOTH_NONE:
 		    default:
 			int_error(c_token, "unrecognized 'smooth' option");

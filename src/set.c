@@ -312,7 +312,7 @@ set_command()
 	case S_HIDDEN3D:
 	    set_hidden3d();
 	    break;
-	case S_HISTORYSIZE:	/* Deprecated in favor of "set history size" */
+	case S_HISTORYSIZE:	/* deprecated in favor of "set history size" */
 	case S_HISTORY:
 	    set_history();
 	    break;
@@ -1582,6 +1582,7 @@ set_dgrid3d()
 
     c_token++;
 
+#ifdef BACKWARD_COMPATIBILITY
     /* Accommodate ancient deprecated syntax "set dgrid3d ,,<normval>" */
     if (equals(c_token,",") && equals(c_token+1,",")) {
 	c_token += 2;
@@ -1590,17 +1591,20 @@ set_dgrid3d()
 	dgrid3d = TRUE;
 	return;
     }
+#endif
 
     if (might_be_numeric(c_token)) {
 	gridx = gridy = int_expression();
 	if (equals(c_token, ",")) {
 	    c_token++;
 	    gridy = int_expression();
+#ifdef BACKWARD_COMPATIBILITY
 	    /* Deprecated syntax using 3 numeric parameters and no keywords */
 	    if (equals(c_token, ",")) {
 		c_token++;
 		normval = int_expression();
 	    }
+#endif
 	}
     }
 
@@ -3763,14 +3767,16 @@ set_pm3d()
 	    case S_PM3D_NOFTRIANGLES: /* "noftr$iangles" */
 		pm3d.ftriangles = 0;
 		continue;
-	    /* deprecated pm3d "hidden3d" option, now used for borders */
 	    case S_PM3D_HIDDEN:
+#ifdef BACKWARD_COMPATIBILITY
+	    /* deprecated pm3d "hidden3d" option, now used for borders */
 		if (isanumber(c_token+1)) {
 		    c_token++;
 		    load_linetype(&pm3d.border, int_expression());
 		    c_token--;
 		    continue;
 		}
+#endif
 		/* fall through */
 	    case S_PM3D_BORDER: /* border {linespec} */
 		pm3d.border = default_pm3d_border;
@@ -3789,11 +3795,9 @@ set_pm3d()
 		pm3d.border.l_type = LT_NODRAW;
 		continue;
 	    case S_PM3D_SOLID: /* "so$lid" */
-	    case S_PM3D_NOTRANSPARENT: /* "notr$ansparent" */
 	    case S_PM3D_NOSOLID: /* "noso$lid" */
-	    case S_PM3D_TRANSPARENT: /* "tr$ansparent" */
-		if (interactive)
-		    int_warn(c_token, "Deprecated syntax --- ignored");
+	    case S_PM3D_TRANSPARENT: /* deprecated option (ignored) "tr$ansparent" */
+	    case S_PM3D_NOTRANSPARENT: /* deprecated option "notr$ansparent" */
 	    case S_PM3D_IMPLICIT: /* "i$mplicit" */
 	    case S_PM3D_NOEXPLICIT: /* "noe$xplicit" */
 		pm3d.implicit = PM3D_IMPLICIT;

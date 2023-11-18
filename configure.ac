@@ -1024,13 +1024,13 @@ AC_ARG_ENABLE(function-blocks,dnl
                [ Define to support defining a function as a here document])
    )
 
-dnl Enable parsing of deprecated syntax
-dnl AC_ARG_ENABLE(backwards-compatibility,dnl
-dnl [  --enable-backwards-compatibility       enable deprecated syntax ],
-dnl   [if test "$enableval" = yes; then
-dnl     AC_DEFINE(BACKWARDS_COMPATIBLE,1,
-dnl                [ Define to allow use of certain deprecated syntax. ])
-dnl   fi])
+Enable parsing of deprecated syntax
+AC_ARG_ENABLE(backward-compatibility,dnl
+[  --enable-backward-compatibility       enable some deprecated syntax ],
+  [if test "$enableval" = yes; then
+    AC_DEFINE(BACKWARD_COMPATIBILITY,1,
+               [ Define to allow use of some deprecated syntax. ])
+  fi])
 
 dnl Qt terminal
 
@@ -1466,11 +1466,11 @@ else
   AC_MSG_RESULT([  plugin support for loading external functions:   no ])
 fi
 
-dnl if test "$enable_backwards_compatibility" = yes; then
-dnl   AC_MSG_RESULT([  Allow deprecated syntax: yes])
-dnl else
-dnl   AC_MSG_RESULT([  Allow deprecated syntax: no (use --enable-backwards-compatibility)])
-dnl fi
+if test "$enable_backward_compatibility" = yes; then
+  AC_MSG_RESULT([  Allow deprecated syntax:                         yes])
+else
+  AC_MSG_RESULT([  Allow deprecated syntax:                         no (use --enable-backward-compatibility)])
+fi
 
 if test "$enable_stats" != no; then
   AC_MSG_RESULT([  Statistical summary of data ("stats" command):   yes])
