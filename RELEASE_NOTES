@@ -1,16 +1,13 @@
-		Gnuplot Version 6.0 rc3 Release Notes
-		=====================================
+		Gnuplot Version 6.0 Release Notes
+		=================================
 
 Version 6.0 is the start of a new stable release series.
 Work on gnuplot 6 has proceeded in parallel with the incremental updates to
 version 5.4 over the past three years.  The new version introduces extensions
 to the gnuplot command language, support for new output protocols, and
-additional plotting styles.  Backwards compatibility is given high priority
+additional plotting styles.  Backward compatibility is given high priority
 in gnuplot development, so users should find no significant changes required
 for techniques or code they are currently using with gnuplot 5.
-
-Your feedback from testing of this release candidate will contribute to
-the success of a full 6.0 release expected later in 2023.
 
 Gnuplot development is tracked in a git repository on SourceForge.
 You can generate a complete history of changes using "git log"
@@ -21,7 +18,7 @@ after downloading:
     git log
 </pre>
 
-Release Notes date:  13-Nov-2023
+Release Notes date:  28-Nov-2023
 
 		Features introduced in version 6
 		================================
@@ -102,6 +99,9 @@ For more example plots see
 	  dumb or caca terminals.
 	o latex terminals standalone mode updated to work with texlive2023
 - Miscellaneous other new features
+	o Multiplots can now be saved, replotted, and resized interactively.
+	  This is a change from all previous gnuplot versions, where only the
+	  most recent component of a multiplot could be replotted.
 	o Time unit settings for major and minor axis tics.  For example,
 	  minor tic marks can be placed at exactly one month intervals.
 	o The character sequence $# in a using specifier evaluates to the total
@@ -143,7 +143,8 @@ For more example plots see
 		================================
 
 - Replotting and mousing multiplots
-	o new commands "remultiplot", "set mouse multiplot"
+	o new commands "remultiplot"
+	O new command "set mouse multiplot"  (NB: reverted in 6.0)
 	o command sequence to regenerate full multiplot is saved to a datablock
 - Additional keyentry options to construct custom keys
 	o keyentry "text" can be used to place a secondary title in the key
@@ -155,6 +156,13 @@ For more example plots see
 	o setting minitic scale to 0 does not disable the corresponding grid lines
 	o use of stacked histograms with variable number of data columns
 
+		Changes between 6.0-rc3 and full release 6.0
+		============================================
+
+- Replotting and mousing multiplots
+	o now working much more comprehensively
+	o revert "set mouse multiplot" as a separate command; it's now always in effect
+- "plot with polygons" now guarantees that the border of each polygon is a closed curve
 
 
 		Notes for packagers and testers
@@ -256,7 +264,7 @@ file of the source package; the short version for linux/unix-like
 systems is to unpack the tarball and then
 <PRE>
 build it:
-      cd gnuplot-6.0.rc3 ; ./configure ; make
+      cd gnuplot-6.0.0 ; ./configure ; make
 test it:
       make check
 install it:

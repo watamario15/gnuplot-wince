@@ -1,3 +1,11 @@
+Changes between 6.0-rc3 and 6.0
+===============================
+
+- Replotting and mousing multiplots
+	o now working much more comprehensively
+	o revert "set mouse multiplot" as a separate command; it's now always in effect
+- "plot with polygons" now guarantees that the border of each polygon is a closed curve
+
 Changes between 6.0-rc2 and -rc3
 ================================
 
