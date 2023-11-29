@@ -504,8 +504,6 @@ D viridis 1
 #b 試験段階: コマンド `replot` は、直近の plot コマンドが完了済みの
 ## multiplot の一部分であるかどうかをチェックします。もしそうなら、単一
 ## の plot コマンドを実行する代わりに `remultiplot` を実行します。
-#b 試験段階: 新しいコマンド `set mouse multiplot` は、マウス操作による
-## replot の要求に対して、適当な場合は `remultiplot` を生成します。
 ## しかし、マウス座標の読み出し、拡大/視点移動の操作は、以前の gnuplot
 ## の版でそうだったように、最後の plot 要素に対する軸設定にのみ基づいて
 ## 行われます。$GPVAL_LAST_MULTIPLOT に保存されるコマンドが、各 plot 要
@@ -10103,7 +10101,7 @@ C using の書式 (format)
 
  試験段階: 直前の plot コマンドが完了済みの multiplot の一部であれば、
  `replot` は暗黙に `remultiplot` を呼び出します。
- `set mouse multiplot` が有効であれば、視線移動/拡大などのマウス操作で
+ 視線移動/拡大などのマウス操作で
  も `remultiplot` を呼び出します。
 
 2 replot
@@ -10144,7 +10142,7 @@ C using の書式 (format)
  試験段階 (詳細は今後の gnuplot の版で変更の可能性あり):
  直前に書いたグラフが multiplot の一部だった場合、`replot` コマンドは現
  在は自動的に `remultiplot` として扱います。いくつかの注意事項がありま
- す。以下参照: `new multiplots`, `remultiplot`, `set mouse multiplot`。
+ す。以下参照: `new multiplots`, `remultiplot`。
 
 2 reread
 ?commands reread
@@ -13558,7 +13556,7 @@ Ffigure_multiple_keys
 
  多重描画 (multiplot) モードでのマウス座標の読み出しは、multiplot 内の
  最も最後のグラフに対してのみ機能します。しかし、以下参照:
- `set mouse multiplot`, `new multiplots`。
+ `new multiplots`。
 
  書式:
        set mouse {doubleclick <ms>} {nodoubleclick}
@@ -13570,7 +13568,6 @@ Ffigure_multiple_keys
                  {mouseformat <int> | <string> | function <f(x,y)>}
                  {{no}labels {"labeloptions"}}
                  {{no}zoomjump} {{no}verbose}
-                 {{no}multiplot}
        unset mouse
 
  オプション `noruler` と `ruler` は、定規 (ruler) 機能を off, on にしま
@@ -13650,23 +13647,6 @@ Ffigure_multiple_keys
   6   x = 日付/時刻   y = 軸座標         [31. 12. 1999 23:59, 2.45]
   7   `set mouse mouseformat <format-string>` による書式
   8   `set mouse mouseformat function <func>` による書式
-4 multiplot
-?set mouse multiplot
-?mouse multiplot
- 通常、表示されている多重グラフ (multiplot) 内で正しく機能するマウス操
- 作は、最後の plot 要素から読み出す座標のみです。
- 再描画/拡大/視線移動等はすべて `replot` 操作を引き起こしますが、それは
- 最後の plot 以外の描画要素をすべて消してしまいます。
-
- 試験段階: コマンド `set mouse multiplot` は、多重描画グラフ上では、マ
- ウスが生成する `replot` 操作をすべて `remultiplot` で置き換えます。こ
- れは、再描画/拡大/視線移動や他のマウス動作 (しかし座標の読み出し以外!)
- を多重描画グラフのすべてのグラフ要素に適用しようとします。この操作は、
- 各 plot 要素が両立しない軸の設定を使用し得る以上、必然的に不完全です。
- しかし、「replot が最後の一つを除いてすべてのグラフを破壊する」ことに
- 対する一つの改善にはなります。将来の gnuplot の版では、多分これがデフ
- ォルトになり、多重グラフ上のマウス操作のサポート範囲も改善することでし
- ょう。以下参照: `new multiplots`, `remultiplot`。
 4 マウススクロール (scrolling)
 ?set mouse scrolling
 ?mouse scrolling
@@ -13857,7 +13837,7 @@ Ffigure_multiple_keys
        plot cos(2*x)
        unset multiplot
 
- 以下参照: `remultiplot`, `new multiplots`, `set mouse multiplot`。また
+ 以下参照: `remultiplot`, `new multiplots`。また
  以下も参照
 ^ <a href="http://www.gnuplot.info/demo/multiplt.html">
  multiplot のデモ (multiplt.dem)
