@@ -15409,20 +15409,19 @@ Ffigure_polar_grid
  The <xscale> and <yscale> values are scale factors for the size of the plot,
  which includes the graph, labels, and margins.
 
- `Historical note`: In early versions of gnuplot some terminal types used
- `set size` to control also the size of the output canvas;
- other terminal types did not.  Now there are two distinct properties:
- `'set size'` and `'set term ... size'`.
+ Historical note: In early versions of gnuplot some terminal types used
+ `set size` to control also the size of the output canvas.
+ Now there are two distinct properties: `'set size'` and `'set term ... size'`.
 
  `set term <terminal_type> size <x units>, <y units>` controls the size of the
  output file, or `canvas`. Please see individual terminal documentation for the
  units of the size parameters.  By default, the plot will fill this canvas.
 
  `set size <xscale>, <yscale>` scales the plot itself relative to the size of
- the canvas.  Scale values less than 1.0 will cause the plot to not fill the
- entire canvas.  Scale values larger than 1.0 will cause only a portion of the
- plot to fit on the canvas.  Setting scale values larger than 1 may cause
- problems on some terminal types.
+ the canvas.  Scale values less than 1.0 cause the plot to fill only part of the
+ canvas. This can be used together with `multiplot` to inset a small plot inside
+ a larger plot or to place several small plots side-by-side.
+ Scale values greater than 1.0 are not supported and may cause errors.
 
  `ratio` causes `gnuplot` to try to create a graph with an aspect ratio of <r>
  (the ratio of the y-axis length to the x-axis length) within the portion of
