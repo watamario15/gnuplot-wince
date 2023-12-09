@@ -12,7 +12,7 @@ AC_PREREQ([2.69])
 AC_CONFIG_HEADERS(config.h:config.hin)
 
 dnl The line below is for use during development
-dnl AC_DEFINE(DEVELOPMENT_VERSION,1,[Provide contact info for gnuplot develoment])
+dnl AC_DEFINE(DEVELOPMENT_VERSION,1,[Provide timestamp for gnuplot develoment])
 dnl The line below is for packaging a release version
 AM_CONDITIONAL([DEVELOPMENT_VERSION], false)
 
@@ -1469,7 +1469,7 @@ fi
 if test "$enable_backward_compatibility" = yes; then
   AC_MSG_RESULT([  Allow deprecated syntax:                         yes])
 else
-  AC_MSG_RESULT([  Allow deprecated syntax:                         no (use --enable-backward-compatibility)])
+  AC_MSG_RESULT([  Allow deprecated syntax:                         no ])
 fi
 
 if test "$enable_stats" != no; then
