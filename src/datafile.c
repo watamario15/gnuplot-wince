@@ -1332,6 +1332,9 @@ df_open(const char *cmd_filename, int max_using, struct curve_points *plot)
 	/* zsort filter will be applied to this data */
 	if (equals(c_token, "zsort")) {
 	    c_token++;
+	    /* FIXME: 2D only! (plot_filter is outside the 2D/3D overlap in headers) */
+	    if (plot && plot->plot_type == DATA3D)
+		continue;
 	    if (plot)
 		plot->plot_filter = FILTER_ZSORT;
 	    continue;
