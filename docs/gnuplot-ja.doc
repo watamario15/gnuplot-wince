@@ -1,4 +1,4 @@
-C corresponding original gnuplot.doc for gnuplot-6.0.0rc3
+C corresponding original gnuplot.doc for gnuplot-6.0.0
 C
 C Copyright (C) 1986 - 1993, 1998, 1999, 2000, 2001, 2004   Thomas Williams, Colin Kelley et al.
 C
@@ -483,11 +483,12 @@ D viridis 1
 
 3 多重描画モード (Multiplots)
 ?new multiplots
- 現在は、多重描画グラフ (multiplot) の生成時に実行したコマンドを、名前
- 付きデータブロック $GPVAL_LAST_MULTIPLOT に保存します。そしてこれは、
- 新しいコマンド `remultiplot` で再実行できます。再生成した多重描画グラ
- フは、その間にグラフの設定 (軸の範囲や対数軸設定等) が変更されていれば、
- 元のものと完全に一致するとは限りません。
+ 現在は、多重描画グラフ (multiplot) の最初の生成時に実行したコマンドを、
+ データブロック $GPVAL_LAST_MULTIPLOT に保存します。そしてこれは、
+ 新しいコマンド `remultiplot` で再実行できます。保存したコマンドのうち
+ 再実行に問題があるコマンドは、再実行はされません。再生成した多重描画グ
+ ラフは、その間にグラフの設定 (軸の範囲や対数軸設定等) が変更されていれ
+ ば、元のものと完全に一致するとは限りません。
 
  以下のコマンド列は、元のグラフの状態と multiplot コマンドの両方をスク
  リプトファイルに保存し、後で再読み込みできるようにします。
@@ -501,9 +502,13 @@ D viridis 1
       unset print
 
 #start
-#b 試験段階: コマンド `replot` は、直近の plot コマンドが完了済みの
-## multiplot の一部分であるかどうかをチェックします。もしそうなら、単一
-## の plot コマンドを実行する代わりに `remultiplot` を実行します。
+#b コマンド `replot` は、直近の plot コマンドが完了済みの multiplot の
+## 一部分であるかどうかをチェックします。もしそうなら、単一の plot コマ
+## ンドを実行する代わりに `remultiplot` を実行します。
+#b 試験段階: 表示されている multiplot グラフ上でのウィンドウイベント、
+## マウスイベント、またはホットキーが生成する replot の要求は、適切な場
+## 合は `remultiplot` を呼び出します。これは、現在はスクリーン上に表示
+## 中の multiplot グラフを、例えばリサイズ可能であることを意味します。
 ## しかし、マウス座標の読み出し、拡大/視点移動の操作は、以前の gnuplot
 ## の版でそうだったように、最後の plot 要素に対する軸設定にのみ基づいて
 ## 行われます。$GPVAL_LAST_MULTIPLOT に保存されるコマンドが、各 plot 要
@@ -6086,12 +6091,15 @@ Ffigure_points
 
       plot DATA {using 1:2} with polygons
 
- `plot with polygons` は、現在は `plot with filledcurves closed` として
- 処理されます。各多角形には、3 列目の値を与え、キーワード `lc variable`
- を指定する (その値を linetype と解釈) か、`lc rgb variable` を指定する
- (その値を 24 ビット RGB 色と解釈) ことで、個別の色を割り当てることがで
- きます。多角形の最初の頂点の色の値のみが使用されます。境界の線種は、も
- しあれば塗り潰しスタイル (fill style) から取ります。
+ `plot with polygons` は、`plot with filledcurves closed` として処理し
+ ますが、各多角形の境界を閉曲線として描画する場合を除きます。それは、そ
+ のその最初と最後の点が同じでなくてもです。境界線の線種は、塗り潰しスタ
+ イル (fill style) から取ります。入力データファイルには、単一の空行で区
+ 切って複数の多角形を入れることも可能です。各多角形には、3 列目の値を与
+ え、キーワード `lc variable` を指定する (その値を linetype と解釈) か、
+ `lc rgb variable` を指定する (その値を 24 ビット RGB 色と解釈) ことで、
+ 個別の色を割り当てることができます。多角形の最初の頂点の色の値のみを使
+ 用します。
 
  3 次元グラフ:
 
@@ -10101,8 +10109,8 @@ C using の書式 (format)
 
  試験段階: 直前の plot コマンドが完了済みの multiplot の一部であれば、
  `replot` は暗黙に `remultiplot` を呼び出します。
- 視線移動/拡大などのマウス操作で
- も `remultiplot` を呼び出します。
+ multiplot グラフが表示されている間は、ホットキーや視線移動/拡大などの
+ マウス操作も `remultiplot` を呼び出します。
 
 2 replot
 ?commands replot
@@ -13555,8 +13563,7 @@ Ffigure_multiple_keys
  ます (以下参照: `set view azimuth`)。
 
  多重描画 (multiplot) モードでのマウス座標の読み出しは、multiplot 内の
- 最も最後のグラフに対してのみ機能します。しかし、以下参照:
- `new multiplots`。
+ 最も最後のグラフに対してのみ表示されます。以下参照: `new multiplots`。
 
  書式:
        set mouse {doubleclick <ms>} {nodoubleclick}
@@ -15615,11 +15622,10 @@ Ffigure_polar_grid
  <xscale> と <yscale> は描画全体の拡大の倍率で、描画全体とはグラフとラ
  ベルと余白の部分を含みます。
 
- `歴史的な注意`: gnuplot の以前の版では、`set size` の値を、出力する描
- 画領域 (キャンバス) のサイズを制御するのにも使っていた出力形式もありま
- したが、すべての出力形式がそうだったわけではありませんでした。現在は、
- `'set size'` と `'set term ... size'` の 2 つは、はっきり違う属性を設
- 定します。
+ 歴史的な注意: gnuplot の以前の版では、`set size` の値を、出力する描画
+ 領域 (キャンバス) のサイズを制御するのにも使っていた出力形式もありまし
+ た。現在は、`'set size'` と `'set term ... size'` の 2 つは、はっきり
+ 違う属性を設定します。
 
  `set term <terminal_type> size <x 単位>, <y 単位>` は、出力ファイルの
  サイズ、または "キャンバス" のサイズを制御します。サイズパラメータの有
@@ -15628,9 +15634,10 @@ Ffigure_polar_grid
 
  `set size <xscale>, <yscale>` は、描画自体をキャンバスのサイズに対して
  相対的に伸縮させます。1.0 より小さい伸縮値を指定すると、グラフはキャン
- バス全体を埋めず、1.0 より大きい伸縮値を指定すると、グラフの一部分のみ
- がキャンバス全体に合うように描画されます。1 より大きい伸縮値を指定する
- と、ある出力形式では問題が起こるかもしれません。
+ の一部分のみを埋めます。これは、`multiplot` モードで小さいグラフを大き
+ いグラフの中に挿入したり、小さいグラフをいくつか並べたりするのに使えま
+ す。1.0 より大きい伸縮値はサポートしておらず、エラーを引き起こす可能性
+ があります。
 
  `ratio` は、指定した <xscale>, <yscale> の描画範囲内で、グラフのアスペ
  クト比 (縦横比) を <r> にします (<r> は x 方向の長さに対する y 方向の
