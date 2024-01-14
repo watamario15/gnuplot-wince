@@ -65,6 +65,7 @@ static char *RCSid() { return RCSid("$Id: mouse.c,v 1.117.2.5 2010/09/10 18:29:1
 #include "term_api.h"
 #include "util3d.h"
 #include "hidden3d.h"
+#include "wrapper.h"
 
 #ifdef _Windows
 # include "win/winmain.h"
@@ -550,7 +551,7 @@ GetRulerString(char *p, double x, double y)
 	if (mouse_setting.polardistance == 1) { /* (distance, angle) */
 	    phi = (180 / M_PI) * atan2(y - ry, x - rx);
 # ifdef OS2
-	    strcat(format, ";% #.4gø)");
+	    strcat(format, ";% #.4gÃ¸)");
 # else
 	    strcat(format, ", % #.4gdeg)");
 # endif

@@ -157,6 +157,7 @@ static char *RCSid() { return RCSid("$Id: datafile.c,v 1.172.2.11 2010/07/01 22:
 #include "util.h"
 #include "breaders.h"
 #include "variable.h" /* For locale handling */
+#include "wrapper.h"
 
 /* test to see if the end of an inline datafile is reached */
 #define is_EOF(c) ((c) == 'e' || (c) == 'E')

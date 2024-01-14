@@ -44,6 +44,7 @@ static char *RCSid() { return RCSid("$Id: util.c,v 1.84.2.3 2010/03/14 00:51:36 
 #include "plot.h"
 #include "term_api.h"		/* for term_end_plot() used by graph_error() */
 #include "variable.h" /* For locale handling */
+#include "wrapper.h"
 
 #if defined(HAVE_DIRENT_H)
 # include <sys/types.h>

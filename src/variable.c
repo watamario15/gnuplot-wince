@@ -44,6 +44,7 @@ static char *RCSid() { return RCSid("$Id: variable.c,v 1.34 2008/06/04 02:38:11 
 #include "command.h"
 #include "util.h"
 #include "term_api.h"
+#include "wrapper.h"
 
 #define PATHSEP_TO_NUL(arg)			\
 do {						\

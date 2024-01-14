@@ -31,6 +31,7 @@ static char *RCSid() { return RCSid("$Id: binary.c,v 1.12 2004/07/25 12:25:00 br
 
 #include "alloc.h"
 #include "util.h"
+#include "wrapper.h"
 
 /* This routine scans the first block of the file to see if the file
  * is a binary file.  A file is considered binary if 10% of the

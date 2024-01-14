@@ -68,6 +68,7 @@ static char *RCSid() { return RCSid("$Id: show.c,v 1.227.2.8 2010/09/18 02:48:02
 #include "color.h"
 #include "pm3d.h"
 #include "getcolor.h"
+#include "wrapper.h"
 #include <ctype.h>
 
 /******** Local functions ********/

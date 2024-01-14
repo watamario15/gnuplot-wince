@@ -288,10 +288,9 @@ get_num(char str[])
     if (token[t_num].l_val.type == INTGR) {
 	long lval;
 	char *endptr;
-	errno = 0;
+	// errno = 0;
 	lval = strtol(str, &endptr, 0);
-	if (!errno &&
-	   ((token[t_num].l_val.v.int_val = lval) == lval))
+	if (((token[t_num].l_val.v.int_val = lval) == lval))
 		return(endptr-str);
 	int_warn(t_num, "integer overflow; changing to floating point");
 	token[t_num].l_val.type = CMPLX;

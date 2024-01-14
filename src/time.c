@@ -52,6 +52,7 @@ static char *RCSid() { return RCSid("$Id: time.c,v 1.20.2.1 2009/06/12 05:02:14 
 
 #include "util.h"
 #include "variable.h"
+#include "wrapper.h"
 
 /* build as a standalone test */
 

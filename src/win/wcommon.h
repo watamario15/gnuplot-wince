@@ -64,7 +64,7 @@
 /* winmain.c */
 #ifdef WIN32
 # define PACKVERSION(major,minor) MAKELONG(minor,major)
-extern DWORD GetDllVersion(LPCTSTR lpszDllName);
+extern DWORD GetDllVersion0(LPCTSTR lpszDllName);
 extern char *appdata_directory(void);
 #endif
 

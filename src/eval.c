@@ -49,6 +49,7 @@ static char *RCSid() { return RCSid("$Id: eval.c,v 1.74.2.2 2010/05/12 20:06:10 
 #include "standard.h"
 #include "util.h"
 #include "version.h"
+#include "wrapper.h"
 
 #include <signal.h>
 #include <setjmp.h>
@@ -620,7 +621,7 @@ evaluate_at(struct at_type *at_ptr, struct value *val_ptr)
     double temp = 0;
 
     undefined = FALSE;
-    errno = 0;
+    // errno = 0;
     reset_stack();
 
 #ifndef DOSX286
@@ -639,9 +640,7 @@ evaluate_at(struct at_type *at_ptr, struct value *val_ptr)
     }
 #endif
 
-    if (errno == EDOM || errno == ERANGE) {
-	undefined = TRUE;
-    } else if (!undefined) {	/* undefined (but not errno) may have been set by matherr */
+    if (!undefined) {	/* undefined (but not errno) may have been set by matherr */
 	(void) pop(val_ptr);
 	check_stack();
 	/* At least one machine (ATT 3b1) computes Inf without a SIGFPE */
