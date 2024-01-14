@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: set.c,v 1.299.2.15 2010/12/09 03:52:12 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: set.c,v 1.299.2.16 2011/01/26 07:13:38 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - set.c */
@@ -63,6 +63,7 @@ static char *RCSid() { return RCSid("$Id: set.c,v 1.299.2.15 2010/12/09 03:52:12
 #include "variable.h"
 #include "pm3d.h"
 #include "getcolor.h"
+#include "wrapper.h"
 #include <ctype.h>
 
 static palette_color_mode pm3d_last_set_palette_mode = SMPAL_COLOR_MODE_NONE;

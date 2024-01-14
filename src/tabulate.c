@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: tabulate.c,v 1.7.2.3 2010/03/21 04:00:05 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: tabulate.c,v 1.7.2.4 2010/03/21 04:07:13 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - tabulate.c */

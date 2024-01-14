@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: variable.c,v 1.34 2008/06/04 02:38:11 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: variable.c,v 1.34.2.1 2010/02/07 23:17:34 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - variable.c */
@@ -44,6 +44,7 @@ static char *RCSid() { return RCSid("$Id: variable.c,v 1.34 2008/06/04 02:38:11 
 #include "command.h"
 #include "util.h"
 #include "term_api.h"
+#include "wrapper.h"
 
 #define PATHSEP_TO_NUL(arg)			\
 do {						\
@@ -78,7 +79,7 @@ loadpath_handler(int action, char *path)
     /* index pointer, end of loadpath,
      * env section of loadpath, current limit, in that order */
     static char *p, *last, *envptr, *limit;
-    char *appdir;
+    // char *appdir;
 
     switch (action) {
     case ACTION_CLEAR:

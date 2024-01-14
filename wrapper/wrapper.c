@@ -15,18 +15,21 @@ HINSTANCE g_hInstance;
 char g_CurrentDirectory[MAX_PATH];
 HWND g_hCommandBar;
 
+int PASCAL WinMainA(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+		LPSTR lpszCmdLine, int nCmdShow);
+
 int AtoW(LPWSTR pDst, int size, LPCSTR pSrc, int count)
 {
 	if(pDst)
-		return MultiByteToWideChar(CP_ACP, 0, pSrc, count, pDst, size);
-	return MultiByteToWideChar(CP_ACP, 0, pSrc, count, NULL, 0);
+		return MultiByteToWideChar(CP_UTF8, 0, pSrc, count, pDst, size);
+	return MultiByteToWideChar(CP_UTF8, 0, pSrc, count, NULL, 0);
 }
 
 int WtoA(LPSTR pDst, int size, LPCWSTR pSrc, int count)
 {
 	if(pDst)
-		return WideCharToMultiByte(CP_ACP, 0, pSrc, count, pDst, size, NULL, NULL);
-	return WideCharToMultiByte(CP_ACP, 0, pSrc, count, NULL, 0, NULL, NULL);
+		return WideCharToMultiByte(CP_UTF8, 0, pSrc, count, pDst, size, NULL, NULL);
+	return WideCharToMultiByte(CP_UTF8, 0, pSrc, count, NULL, 0, NULL, NULL);
 }
 
 size_t GetMultiStringLengthA(LPCSTR lpString)
@@ -430,14 +433,14 @@ int stricmp(const char * _Str1, const char * _Str2)
 	return _stricmp(_Str1, _Str2);
 }
 
-int isatty(int _FileHandle)
+int isatty(FILE *_FileHandle)
 {
-	if(_FileHandle == (int)_fileno(stdin) || _FileHandle == (int)_fileno(stdout) || _FileHandle == (int)_fileno(stderr))
+	if(_FileHandle == _fileno(stdin) || _FileHandle == _fileno(stdout) || _FileHandle == _fileno(stderr))
 		return 1;
 	return 0;
 }
 
-int setmode(int _FileHandle, int _Mode)
+int setmode(FILE *_FileHandle, int _Mode)
 {
 	return 0;
 }
@@ -544,7 +547,7 @@ int strnicmp(const char * _Str1, const char * _Str, size_t _MaxCount)
 
 void setbuf(FILE * _File, char * _Buffer)
 {
-	return setvbuf(_File, _Buffer, _IONBF, 0);
+	setvbuf(_File, _Buffer, _IONBF, 0);
 }
 
 int remove(const char * _Filename)
@@ -961,6 +964,8 @@ HWND CreateWindowExA(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, D
 ATOM RegisterClassA(CONST WNDCLASSA *lpWndClass)
 {
 	ATOM Result;
+	wchar_t *menuName = DuplicateAtoW(lpWndClass->lpszMenuName, -1);
+	wchar_t *className = DuplicateAtoW(lpWndClass->lpszClassName, -1);
 	WNDCLASSW WndClass;
 	WndClass.style = lpWndClass->style;
 	WndClass.lpfnWndProc = lpWndClass->lpfnWndProc;
@@ -970,11 +975,11 @@ ATOM RegisterClassA(CONST WNDCLASSA *lpWndClass)
 	WndClass.hIcon = lpWndClass->hIcon;
 	WndClass.hCursor = lpWndClass->hCursor;
 	WndClass.hbrBackground = lpWndClass->hbrBackground;
-	WndClass.lpszMenuName = DuplicateAtoW(lpWndClass->lpszMenuName, -1);
-	WndClass.lpszClassName = DuplicateAtoW(lpWndClass->lpszClassName, -1);
+	WndClass.lpszMenuName = menuName;
+	WndClass.lpszClassName = className;
 	Result = RegisterClassW(&WndClass);
-	FreeDuplicatedString(WndClass.lpszMenuName);
-	FreeDuplicatedString(WndClass.lpszClassName);
+	FreeDuplicatedString(menuName);
+	FreeDuplicatedString(className);
 	return Result;
 }
 
@@ -1039,7 +1044,7 @@ BOOL AppendMenuA(HMENU hMenu, UINT uFlags, UINT_PTR uIDNewItem, LPCSTR lpNewItem
 	wchar_t* p;
 	bResult = FALSE;
 	if(uFlags & MF_OWNERDRAW)
-		bResult = AppendMenuW(hMenu, uFlags, uIDNewItem, lpNewItem);
+		bResult = AppendMenuW(hMenu, uFlags, uIDNewItem, (wchar_t *)lpNewItem);
 	else
 	{
 		p = DuplicateAtoW(lpNewItem, -1);
@@ -1206,14 +1211,14 @@ BOOL GetOpenFileNameA(LPOPENFILENAMEA p)
 	bResult = GetOpenFileNameW(&ofn);
 	WtoA(p->lpstrFile, p->nMaxFile, ofn.lpstrFile, -1);
 	//
-	FreeDuplicatedString(ofn.lpstrFilter);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrFilter);
 	FreeDuplicatedString(ofn.lpstrCustomFilter);
 	FreeDuplicatedString(ofn.lpstrFile);
 	FreeDuplicatedString(ofn.lpstrFileTitle);
-	FreeDuplicatedString(ofn.lpstrInitialDir);
-	FreeDuplicatedString(ofn.lpstrTitle);
-	FreeDuplicatedString(ofn.lpstrDefExt);
-	FreeDuplicatedString(ofn.lpTemplateName);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrInitialDir);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrTitle);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrDefExt);
+	FreeDuplicatedString((wchar_t *)ofn.lpTemplateName);
 	return bResult;
 }
 
@@ -1244,14 +1249,14 @@ BOOL GetSaveFileNameA(LPOPENFILENAMEA p)
 	bResult = GetSaveFileNameW(&ofn);
 	WtoA(p->lpstrFile, p->nMaxFile, ofn.lpstrFile, -1);
 	//
-	FreeDuplicatedString(ofn.lpstrFilter);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrFilter);
 	FreeDuplicatedString(ofn.lpstrCustomFilter);
 	FreeDuplicatedString(ofn.lpstrFile);
 	FreeDuplicatedString(ofn.lpstrFileTitle);
-	FreeDuplicatedString(ofn.lpstrInitialDir);
-	FreeDuplicatedString(ofn.lpstrTitle);
-	FreeDuplicatedString(ofn.lpstrDefExt);
-	FreeDuplicatedString(ofn.lpTemplateName);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrInitialDir);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrTitle);
+	FreeDuplicatedString((wchar_t *)ofn.lpstrDefExt);
+	FreeDuplicatedString((wchar_t *)ofn.lpTemplateName);
 	return bResult;
 }
 

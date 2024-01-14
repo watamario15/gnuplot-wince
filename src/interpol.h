@@ -1,5 +1,5 @@
 /*
- * $Id: interpol.h,v 1.6 2001/08/09 15:03:52 broeker Exp $
+ * $Id: interpol.h,v 1.7 2004/04/13 17:23:58 broeker Exp $
  */
 
 /* GNUPLOT - interpol.h */

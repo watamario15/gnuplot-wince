@@ -1,5 +1,5 @@
 /*
- * $Id: util.h,v 1.31 2008/03/18 00:16:33 sfeam Exp $
+ * $Id: util.h,v 1.31.2.1 2010/11/12 19:34:39 sfeam Exp $
  */
 
 /* GNUPLOT - util.h */

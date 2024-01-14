@@ -1,5 +1,5 @@
 /*
- * $Id: plot2d.h,v 1.13 2007/08/31 20:03:44 sfeam Exp $
+ * $Id: plot2d.h,v 1.14 2008/03/13 19:53:35 sfeam Exp $
  */
 
 /* GNUPLOT - plot2d.h */

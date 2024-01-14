@@ -1,5 +1,5 @@
 /*
- * $Id: wresourc.h,v 1.6 2004/07/01 17:10:11 broeker Exp $
+ * $Id: wresourc.h,v 1.6.6.1 2010/02/16 07:02:45 mikulik Exp $
  */
 
 /* GNUPLOT - win/wresourc.h */

@@ -1,5 +1,5 @@
 /*
- * $Id: command.h,v 1.47 2008/08/13 02:43:09 sfeam Exp $
+ * $Id: command.h,v 1.48 2008/08/15 00:45:34 sfeam Exp $
  */
 
 /* GNUPLOT - command.h */

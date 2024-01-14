@@ -47,6 +47,7 @@ static char *RCSid() { return RCSid("$Id: wmenu.c,v 1.8.4.1 2010/02/16 07:04:19 
 #include <windows.h>
 #include <windowsx.h>
 #if WINVER >= 0x030a
+# include <commctrl.h>
 # include <commdlg.h>
 #endif
 #include <string.h>	/* only use far items */
@@ -922,8 +923,8 @@ char FAR *ButtonText[BUTTONMAX];
 	GetClientRect(lptw->hWndParent, &rect);
 //	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
 //			rect.right, rect.bottom-lptw->ButtonHeight,
-	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + GetSystemMetrics(SM_CYMENU),
-			rect.right, rect.bottom-lptw->ButtonHeight - GetSystemMetrics(SM_CYMENU),
+	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + CommandBar_Height(g_hCommandBar),
+			rect.right, rect.bottom-lptw->ButtonHeight - CommandBar_Height(g_hCommandBar),
 			SWP_NOZORDER | SWP_NOACTIVATE);
 
 	/* create the buttons */
@@ -936,7 +937,7 @@ char FAR *ButtonText[BUTTONMAX];
 		lpmw->hButton[i] = CreateWindow("button", ButtonText[i],
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 //				i * ButtonX, 0,
-				i * ButtonX, GetSystemMetrics(SM_CYMENU),
+				i * ButtonX, CommandBar_Height(g_hCommandBar),
 				ButtonX, ButtonY,
 				lptw->hWndParent, (HMENU)i,
 				lptw->hInstance, lptw);

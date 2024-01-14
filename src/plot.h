@@ -1,5 +1,5 @@
 /*
- * $Id: plot.h,v 1.44 2006/11/10 22:46:43 tlecomte Exp $
+ * $Id: plot.h,v 1.45 2008/03/30 03:27:54 sfeam Exp $
  */
 
 /* GNUPLOT - plot.h */

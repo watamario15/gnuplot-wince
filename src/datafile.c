@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: datafile.c,v 1.172.2.11 2010/07/01 22:53:10 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: datafile.c,v 1.172.2.12 2010/09/18 02:53:15 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - datafile.c */
@@ -157,6 +157,7 @@ static char *RCSid() { return RCSid("$Id: datafile.c,v 1.172.2.11 2010/07/01 22:
 #include "util.h"
 #include "breaders.h"
 #include "variable.h" /* For locale handling */
+#include "wrapper.h"
 
 /* test to see if the end of an inline datafile is reached */
 #define is_EOF(c) ((c) == 'e' || (c) == 'E')
@@ -4047,7 +4048,7 @@ df_swap_bytes_by_endianess(char *data, int read_order, int read_size)
 static int
 df_skip_bytes(int nbytes)
 {
-    char cval;
+    // char cval;
 
 #if defined(PIPES)
     if (df_pipe_open || plotted_data_from_stdin) {

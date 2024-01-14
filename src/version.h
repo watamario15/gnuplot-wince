@@ -1,5 +1,5 @@
 /*
- * $Id: version.h,v 1.5 2006/08/05 21:33:15 sfeam Exp $
+ * $Id: version.h,v 1.5.4.1 2009/10/08 16:28:38 sfeam Exp $
  */
 
 /* GNUPLOT - version.h */

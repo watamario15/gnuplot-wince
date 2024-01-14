@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: show.c,v 1.227.2.8 2010/09/18 02:48:02 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: show.c,v 1.227.2.9 2010/12/05 00:01:23 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - show.c */
@@ -68,6 +68,7 @@ static char *RCSid() { return RCSid("$Id: show.c,v 1.227.2.8 2010/09/18 02:48:02
 #include "color.h"
 #include "pm3d.h"
 #include "getcolor.h"
+#include "wrapper.h"
 #include <ctype.h>
 
 /******** Local functions ********/

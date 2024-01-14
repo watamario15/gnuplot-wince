@@ -1,5 +1,5 @@
 /*
- * $Id: post.h,v 1.9 2005/07/15 16:56:00 broeker Exp $
+ * $Id: post.h,v 1.10 2005/07/18 18:24:00 sfeam Exp $
  */
 
 /* GNUPLOT - post.h */

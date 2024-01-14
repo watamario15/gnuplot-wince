@@ -48,6 +48,7 @@ static char *RCSid() { return RCSid("$Id: wgraph.c,v 1.67.2.17 2011/02/11 03:47:
 #include <windows.h>
 #include <windowsx.h>
 #if WINVER >= 0x030a
+#  include <commctrl.h>
 #  include <commdlg.h>
 #endif
 #ifndef __MSC__
@@ -59,6 +60,7 @@ static char *RCSid() { return RCSid("$Id: wgraph.c,v 1.67.2.17 2011/02/11 03:47:
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"
+#include "command.h"
 #include "term_api.h"         /* for enum JUSTIFY */
 #ifdef USE_MOUSE
 # include "gpexecute.h"
@@ -710,6 +712,7 @@ MakeFonts(LPGW lpgw, LPRECT lprect, HDC hdc)
 		lpgw->lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
 		lpgw->lf.lfWeight = FW_BOLD;
 	}
+	lpgw->lf.lfQuality = ANTIALIASED_QUALITY;
 
 	if (lpgw->hfonth == 0) {
 		lpgw->hfonth = CreateFontIndirect((LOGFONT FAR *)&(lpgw->lf));
@@ -783,26 +786,26 @@ static void
 SelFont(LPGW lpgw)
 {
 //#if WINVER >= 0x030a
-//	LOGFONT lf;
-//	CHOOSEFONT cf;
+//	LOGFONTW lf;
+//	CHOOSEFONTW cf;
 //	HDC hdc;
-//	char lpszStyle[LF_FACESIZE];
-//	char FAR *p;
+//	wchar_t lpszStyle[LF_FACESIZE];
+//	wchar_t *p;
 //
 //	/* Set all structure fields to zero. */
-//	_fmemset(&cf, 0, sizeof(CHOOSEFONT));
-//	_fmemset(&lf, 0, sizeof(LOGFONT));
-//	cf.lStructSize = sizeof(CHOOSEFONT);
+//	_fmemset(&cf, 0, sizeof(CHOOSEFONTW));
+//	_fmemset(&lf, 0, sizeof(LOGFONTW));
+//	cf.lStructSize = sizeof(CHOOSEFONTW);
 //	cf.hwndOwner = lpgw->hWndGraph;
-//	_fstrncpy(lf.lfFaceName,lpgw->fontname,LF_FACESIZE);
-//	if ((p = _fstrstr(lpgw->fontname," Bold")) != (LPSTR)NULL) {
-//		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-//		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
-//	} else if ((p = _fstrstr(lpgw->fontname," Italic")) != (LPSTR)NULL) {
-//		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-//		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
+//	AtoW(lf.lfFaceName, LF_FACESIZE, lpgw->fontname, -1);
+//	if ((p = wcsstr(lf.lfFaceName, L" Bold")) != NULL) {
+//		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+//		*p = L'\0';
+//	} else if ((p = wcsstr(lf.lfFaceName, L" Italic")) != NULL) {
+//		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+//		*p = L'\0';
 //	} else {
-//		_fstrcpy(lpszStyle,"Regular");
+//		wcscpy(lpszStyle, L"Regular");
 //	}
 //	cf.lpszStyle = lpszStyle;
 //	hdc = GetDC(lpgw->hWndGraph);
@@ -811,8 +814,9 @@ SelFont(LPGW lpgw)
 //	cf.lpLogFont = &lf;
 //	cf.nFontType = SCREEN_FONTTYPE;
 //	cf.Flags = CF_SCREENFONTS | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
-//	if (ChooseFont(&cf)) {
-//		_fstrcpy(lpgw->fontname,lf.lfFaceName);
+//
+//	if (ChooseFontW(&cf)) {
+//		WtoA(lpgw->fontname, MAXFONTNAME, lf.lfFaceName, -1);
 //		lpgw->fontsize = cf.iPointSize / 10;
 //		if (cf.nFontType & BOLD_FONTTYPE)
 //			lstrcat(lpgw->fontname," Bold");

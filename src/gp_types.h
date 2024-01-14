@@ -1,5 +1,5 @@
 /*
- * $Id: gp_types.h,v 1.43 2009/01/04 22:45:41 sfeam Exp $
+ * $Id: gp_types.h,v 1.44 2009/03/26 00:49:13 sfeam Exp $
  */
 
 /* GNUPLOT - gp_types.h */

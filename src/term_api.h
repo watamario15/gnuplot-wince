@@ -1,5 +1,5 @@
 /*
- * $Id: term_api.h,v 1.80.2.4 2010/09/18 02:55:55 sfeam Exp $
+ * $Id: term_api.h,v 1.80.2.5 2010/10/07 05:31:42 sfeam Exp $
  */
 
 /* GNUPLOT - term_api.h */

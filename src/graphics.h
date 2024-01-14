@@ -1,5 +1,5 @@
 /*
- * $Id: graphics.h,v 1.46 2008/09/24 03:19:06 sfeam Exp $
+ * $Id: graphics.h,v 1.47 2009/03/26 00:49:16 sfeam Exp $
  */
 
 /* GNUPLOT - graphics.h */

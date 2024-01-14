@@ -1,5 +1,5 @@
 /*
- * $Id: gp_hist.h,v 1.9 2005/08/12 08:31:56 mikulik Exp $
+ * $Id: gp_hist.h,v 1.10 2008/12/12 21:06:13 sfeam Exp $
  */
 
 /* GNUPLOT - gp_hist.h */

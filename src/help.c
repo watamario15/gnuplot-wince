@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: help.c,v 1.23 2008/01/25 20:55:26 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: help.c,v 1.24 2008/03/30 03:27:54 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - help.c */

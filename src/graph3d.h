@@ -1,5 +1,5 @@
 /*
- * $Id: graph3d.h,v 1.38 2009/04/12 22:27:04 sfeam Exp $
+ * $Id: graph3d.h,v 1.38.2.1 2009/12/20 03:54:42 sfeam Exp $
  */
 
 /* GNUPLOT - graph3d.h */

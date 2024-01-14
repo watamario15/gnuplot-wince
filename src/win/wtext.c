@@ -60,6 +60,7 @@ static char *RCSid() { return RCSid("$Id: wtext.c,v 1.19 2008/11/07 11:55:46 mik
 #include <windows.h>
 #include <windowsx.h>
 #if WINVER >= 0x030a
+# include <commctrl.h>
 # include <commdlg.h>
 #endif
 
@@ -70,7 +71,7 @@ static char *RCSid() { return RCSid("$Id: wtext.c,v 1.19 2008/11/07 11:55:46 mik
 
 /* font stuff */
 #define TEXTFONTSIZE 9
-#define TEXTFONTNAME "Terminal"
+#define TEXTFONTNAME "MS Gothic"
 
 
 #ifndef WGP_CONSOLE
@@ -755,6 +756,7 @@ TextMakeFont(LPTW lptw)
 	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
 	lf.lfWeight = FW_BOLD;
     }
+	lf.lfQuality = ANTIALIASED_QUALITY;
     if (lptw->hfont != 0)
 	DeleteObject(lptw->hfont);
     lptw->hfont = CreateFontIndirect((LOGFONT FAR *)&lf);
@@ -773,27 +775,27 @@ TextMakeFont(LPTW lptw)
 void
 TextSelectFont(LPTW lptw) {
 //#if WINVER >= 0x030a
-//    LOGFONT lf;
-//    CHOOSEFONT cf;
+//    LOGFONTW lf;
+//    CHOOSEFONTW cf;
 //    HDC hdc;
-//    char lpszStyle[LF_FACESIZE];
-//    LPSTR p;
+//    wchar_t lpszStyle[LF_FACESIZE];
+//    wchar_t *p;
 //
 //    /* Set all structure fields to zero. */
-//    _fmemset(&cf, 0, sizeof(CHOOSEFONT));
-//    _fmemset(&lf, 0, sizeof(LOGFONT));
-//    cf.lStructSize = sizeof(CHOOSEFONT);
+//    _fmemset(&cf, 0, sizeof(CHOOSEFONTW));
+//    _fmemset(&lf, 0, sizeof(LOGFONTW));
+//    cf.lStructSize = sizeof(CHOOSEFONTW);
 //    cf.hwndOwner = lptw->hWndParent;
-//    _fstrncpy(lf.lfFaceName,lptw->fontname,LF_FACESIZE);
-//    if ( (p = _fstrstr(lptw->fontname," Bold")) != (LPSTR)NULL ) {
-//	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-//	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
+//    AtoW(lf.lfFaceName, LF_FACESIZE, lptw->fontname, -1);
+//    if ((p = wcsstr(lf.lfFaceName, L" Bold")) != NULL) {
+//        wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+//        *p = L'\0';
+//    } else if ((p = wcsstr(lf.lfFaceName, L" Italic")) != NULL) {
+//        wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+//        *p = L'\0';
+//    } else {
+//        wcscpy(lpszStyle, L"Regular");
 //    }
-//    else if ( (p = _fstrstr(lptw->fontname," Italic")) != (LPSTR)NULL ) {
-//	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-//	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
-//    } else
-//	_fstrcpy(lpszStyle,"Regular");
 //    cf.lpszStyle = lpszStyle;
 //    hdc = GetDC(lptw->hWndText);
 //    lf.lfHeight = -MulDiv(lptw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
@@ -802,22 +804,23 @@ TextSelectFont(LPTW lptw) {
 //    cf.lpLogFont = &lf;
 //    cf.nFontType = SCREEN_FONTTYPE;
 //    cf.Flags = CF_SCREENFONTS | CF_FIXEDPITCHONLY | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
-//    if (ChooseFont(&cf)) {
-//	RECT rect;
-//	_fstrcpy(lptw->fontname,lf.lfFaceName);
-//	lptw->fontsize = cf.iPointSize / 10;
-//	if (cf.nFontType & BOLD_FONTTYPE)
-//	    lstrcat(lptw->fontname," Bold");
-//	if (cf.nFontType & ITALIC_FONTTYPE)
-//	    lstrcat(lptw->fontname," Italic");
-//	TextMakeFont(lptw);
-//	/* force a window update */
-//	GetClientRect(lptw->hWndText, (LPRECT) &rect);
-//	SendMessage(lptw->hWndText, WM_SIZE, SIZE_RESTORED,
-//		    MAKELPARAM(rect.right-rect.left, rect.bottom-rect.top));
-//	GetClientRect(lptw->hWndText, (LPRECT) &rect);
-//	InvalidateRect(lptw->hWndText, (LPRECT) &rect, 1);
-//	UpdateWindow(lptw->hWndText);
+//
+//    if (ChooseFontW(&cf)) {
+//        RECT rect;
+//        WtoA(lptw->fontname, MAXFONTNAME, lf.lfFaceName, -1);
+//        lptw->fontsize = cf.iPointSize / 10;
+//        if (cf.nFontType & BOLD_FONTTYPE)
+//            lstrcat(lptw->fontname," Bold");
+//        if (cf.nFontType & ITALIC_FONTTYPE)
+//            lstrcat(lptw->fontname," Italic");
+//        TextMakeFont(lptw);
+//        /* force a window update */
+//        GetClientRect(lptw->hWndText, (LPRECT) &rect);
+//        SendMessage(lptw->hWndText, WM_SIZE, SIZE_RESTORED,
+//            MAKELPARAM(rect.right-rect.left, rect.bottom-rect.top));
+//        GetClientRect(lptw->hWndText, (LPRECT) &rect);
+//        InvalidateRect(lptw->hWndText, (LPRECT) &rect, 1);
+//        UpdateWindow(lptw->hWndText);
 //    }
 //#endif
 }
@@ -867,15 +870,16 @@ WndParentProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	MMinfo[3].y = ScreenMinSize.y*tm.tmHeight
 	    + GetSystemMetrics(SM_CYHSCROLL) + 2*GetSystemMetrics(SM_CYFRAME)
 //	    + GetSystemMetrics(SM_CYCAPTION);
-	    + GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(SM_CYMENU);
+	    + GetSystemMetrics(SM_CYCAPTION) + CommandBar_Height(g_hCommandBar);
 	return(0);
     }
     case WM_SIZE:
 //	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
 //		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight,
-	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + GetSystemMetrics(SM_CYMENU),
-		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight - GetSystemMetrics(SM_CYMENU),
+	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + CommandBar_Height(g_hCommandBar),
+		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight - CommandBar_Height(g_hCommandBar),
 		     SWP_NOZORDER | SWP_NOACTIVATE);
+	MoveWindow(g_hCommandBar, 0, 0, 0, 0, TRUE);
 	return(0);
     case WM_COMMAND:
 	if (IsWindow(lptw->hWndText))

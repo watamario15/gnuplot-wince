@@ -1,4 +1,4 @@
-/* $Id: amiga.c,v 1.3 2004/04/13 17:23:51 broeker Exp $ */
+/* $Id: amiga.c,v 1.4 2004/07/01 17:10:03 broeker Exp $ */
 
 /* GNUPLOT - amiga.c */
 

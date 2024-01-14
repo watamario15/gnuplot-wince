@@ -1,5 +1,5 @@
 /*
- * $Id: alloc.h,v 1.8 2004/04/13 17:23:51 broeker Exp $
+ * $Id: alloc.h,v 1.9 2004/07/01 17:10:03 broeker Exp $
  */
 
 /* GNUPLOT - alloc.h */

@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: dynarray.c,v 1.10 2004/04/13 17:23:53 broeker Exp $"); }
+static char *RCSid() { return RCSid("$Id: dynarray.c,v 1.11 2004/07/01 17:10:04 broeker Exp $"); }
 #endif
 
 /*[

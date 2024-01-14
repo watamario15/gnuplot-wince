@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: specfun.c,v 1.37 2008/05/21 18:01:22 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: specfun.c,v 1.37.2.1 2010/02/24 04:16:48 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - specfun.c */

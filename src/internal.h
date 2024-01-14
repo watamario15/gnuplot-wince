@@ -1,5 +1,5 @@
 /*
- * $Id: internal.h,v 1.19.2.1 2010/03/21 03:44:32 sfeam Exp $
+ * $Id: internal.h,v 1.19.2.2 2010/09/19 02:31:57 sfeam Exp $
  */
 
 /* GNUPLOT - internal.h */

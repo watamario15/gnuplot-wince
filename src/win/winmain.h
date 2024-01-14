@@ -1,5 +1,5 @@
 /*
- * $Id: winmain.h,v 1.6 2006/07/16 02:50:56 sfeam Exp $
+ * $Id: winmain.h,v 1.7 2008/10/10 22:23:20 mikulik Exp $
  */
 
 /* GNUPLOT - win/winmain.h */

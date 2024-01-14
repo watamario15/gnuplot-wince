@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: mouse.c,v 1.117.2.5 2010/09/10 18:29:15 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: mouse.c,v 1.117.2.6 2011/01/18 21:46:14 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - mouse.c */
@@ -65,6 +65,7 @@ static char *RCSid() { return RCSid("$Id: mouse.c,v 1.117.2.5 2010/09/10 18:29:1
 #include "term_api.h"
 #include "util3d.h"
 #include "hidden3d.h"
+#include "wrapper.h"
 
 #ifdef _Windows
 # include "win/winmain.h"

@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: fit.c,v 1.69.2.1 2010/05/02 21:00:58 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: fit.c,v 1.69.2.2 2010/12/06 22:27:47 sfeam Exp $"); }
 #endif
 
 /*  NOTICE: Change of Copyright Status
@@ -63,6 +63,7 @@ static char *RCSid() { return RCSid("$Id: fit.c,v 1.69.2.1 2010/05/02 21:00:58 s
 #include "misc.h"
 #include "util.h"
 #include "variable.h" /* For locale handling */
+#include "wrapper.h"
 
 /* Just temporary */
 #if defined(VA_START) && defined(STDC_HEADERS)

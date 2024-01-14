@@ -1,5 +1,5 @@
 /*
- * $Id: specfun.h,v 1.7 2001/08/22 14:15:34 broeker Exp $
+ * $Id: specfun.h,v 1.8 2004/04/13 17:24:01 broeker Exp $
  */
 
 /* GNUPLOT - specfun.h */

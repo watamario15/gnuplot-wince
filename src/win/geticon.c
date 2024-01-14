@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: geticon.c,v 1.2 2002/03/10 18:54:52 mikulik Exp $"); }
+static char *RCSid() { return RCSid("$Id: geticon.c,v 1.3 2004/07/01 17:10:10 broeker Exp $"); }
 #endif
 
 /* geticon.c */

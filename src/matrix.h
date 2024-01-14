@@ -1,5 +1,5 @@
 /*
- * $Id: matrix.h,v 1.9 2004/04/13 17:23:58 broeker Exp $
+ * $Id: matrix.h,v 1.10 2004/07/01 17:10:06 broeker Exp $
  */
 
 /* GNUPLOT - matrix.h */
