@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: winmain.c,v 1.26.2.3 2009/11/25 17:59:40 mikulik Exp $"); }
+static char *RCSid() { return RCSid("$Id: winmain.c,v 1.26.2.4 2010/03/21 03:05:49 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - win/winmain.c */
@@ -73,6 +73,7 @@ static char *RCSid() { return RCSid("$Id: winmain.c,v 1.26.2.3 2009/11/25 17:59:
 # define mktemp _mktemp
 #endif
 #include <io.h>
+#include "wrapper.h"
 #include "plot.h"
 #include "setshow.h"
 #include "version.h"
@@ -186,7 +187,7 @@ ShutDown()
  * Shell32.dll, and Shlwapi.dll) The code was copied from the MSDN
  * article "Shell and Common Controls Versions" */
 DWORD
-GetDllVersion(LPCTSTR lpszDllName)
+GetDllVersion0(LPCTSTR lpszDllName)
 {
     HINSTANCE hinstDll;
     DWORD dwVersion = 0;
@@ -258,7 +259,9 @@ appdata_directory(void)
 #endif /* WIN32 */
 
 #ifndef WGP_CONSOLE
-int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+//int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+//		LPSTR lpszCmdLine, int nCmdShow)
+int PASCAL WinMainA(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		LPSTR lpszCmdLine, int nCmdShow)
 #else
 int main(int argc, char **argv)
@@ -771,7 +774,7 @@ void
 close_printer(FILE *outfile)
 {
     fclose(outfile);
-    DumpPrinter(graphwin.hWndGraph, graphwin.Title, win_prntmp);
+//    DumpPrinter(graphwin.hWndGraph, graphwin.Title, win_prntmp);
 }
 
 void

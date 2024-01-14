@@ -1,5 +1,5 @@
 /*
- * $Id: wcommon.h,v 1.8 2005/08/04 16:44:58 mikulik Exp $
+ * $Id: wcommon.h,v 1.9 2006/03/28 09:55:22 broeker Exp $
  */
 
 /* GNUPLOT - wcommon.h */
@@ -46,16 +46,17 @@
 #include <shellapi.h>
 #endif
 #endif
+#include "wrapper.h"
 /* this file contains items that are internal to wgnuplot.dll */
 
 #ifdef WIN32
 
   /* Enable new directory dialogs on Win32 */
-# define WITH_ADV_DIR_DIALOG
+//# define WITH_ADV_DIR_DIALOG
 
   /* Choose between the directory dialog of the windows shell and
      a modified version of the "file open" dialog */
-# define SHELL_DIR_DIALOG 
+//# define SHELL_DIR_DIALOG 
 
 #endif
   
@@ -77,7 +78,7 @@ extern LPSTR szAboutClass;
 
 void NEAR * LocalAllocPtr(UINT flags, UINT size);
 void NEAR * LocalReAllocPtr(void NEAR * ptr, UINT flags, UINT size);
-void LocalFreePtr(void NEAR *ptr);
+//void LocalFreePtr(void NEAR *ptr);
 LPSTR GetInt(LPSTR str, LPINT pval);
 
 /* wtext.c */

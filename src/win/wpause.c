@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wpause.c,v 1.15 2007/02/10 00:14:54 mikulik Exp $"); }
+static char *RCSid() { return RCSid("$Id: wpause.c,v 1.15.2.1 2009/08/31 18:31:25 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - win/wpause.c */
@@ -48,6 +48,7 @@ static char *RCSid() { return RCSid("$Id: wpause.c,v 1.15 2007/02/10 00:14:54 mi
 #include <windows.h>
 #include <windowsx.h>
 #include <string.h>
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"

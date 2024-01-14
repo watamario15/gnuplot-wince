@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wprinter.c,v 1.4 2004/07/01 17:10:11 broeker Exp $"); }
+static char *RCSid() { return RCSid("$Id: wprinter.c,v 1.5 2005/08/03 16:55:40 mikulik Exp $"); }
 #endif
 
 /* GNUPLOT - win/wprinter.c */
@@ -57,6 +57,7 @@ static char *RCSid() { return RCSid("$Id: wprinter.c,v 1.4 2004/07/01 17:10:11 b
 #else
 #include <mem.h>
 #endif
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"
@@ -274,83 +275,83 @@ PrintAbortProc(HDC hdcPrn, int code)
 
 
 /* GetWindowLong(hwnd, 4) must be available for use */
-void WDPROC
-DumpPrinter(HWND hwnd, LPSTR szAppName, LPSTR szFileName)
-{
-    HDC printer;
-    PRINTDLG pd;
-    GP_PRINT pr;
-    DOCINFO di;
-    char *buf;
-    WORD *bufcount;
-    int count;
-    FILE *f;
-    long lsize;
-    long ldone;
-    char pcdone[10];
-
-    memset(&pd, 0, sizeof(PRINTDLG));
-    pd.lStructSize = sizeof(PRINTDLG);
-    pd.hwndOwner = hwnd;
-    pd.Flags = PD_PRINTSETUP | PD_RETURNDC;
-
-    if ((f = fopen(szFileName, "rb")) == (FILE *)NULL)
-	return;
-    fseek(f, 0L, SEEK_END);
-    lsize = ftell(f);
-    if (lsize <= 0)
-	lsize = 1;
-    fseek(f, 0L, SEEK_SET);
-    ldone = 0;
-
-    if (PrintDlg(&pd)) {
-	printer = pd.hDC;
-	if (printer != (HDC)NULL) {
-	    pr.hdcPrn = printer;
-	    SetWindowLong(hwnd, 4, (LONG)((GP_LPPRINT)&pr));
-	    PrintRegister((GP_LPPRINT)&pr);
-	    if ( (buf = malloc(4096+2)) != (char *)NULL ) {
-	    	bufcount = (WORD *)buf;
-		EnableWindow(hwnd,FALSE);
-		pr.bUserAbort = FALSE;
-/* is parent set correctly */
-		pr.hDlgPrint = CreateDialogParam(hdllInstance,
-						 "CancelDlgBox",
-						 hwnd, PrintDlgProc,
-						 (LPARAM) szAppName);
-		SetAbortProc(printer, PrintAbortProc);
-		di.cbSize = sizeof(DOCINFO);
-		di.lpszDocName = szAppName;
-		di.lpszOutput = NULL;
-		if (StartDoc(printer, &di) > 0) {
-		    while ( pr.hDlgPrint && !pr.bUserAbort
-			    && (count = fread(buf+2, 1, 4096, f)) != 0 ) {
-			*bufcount = count;
-			Escape(printer, PASSTHROUGH, count+2, (LPSTR)buf, NULL);
-	    		ldone += count;
-	    		sprintf(pcdone, "%d%% done",
-				(int) (ldone * 100 / lsize));
-	    		SetWindowText(GetDlgItem(pr.hDlgPrint, CANCEL_PCDONE),
-				      pcdone);
-			if (pr.bUserAbort)
-			    AbortDoc(printer);
-			else
-			    EndDoc(printer);
-		    }
-		    if (!pr.bUserAbort) {
-			EnableWindow(hwnd,TRUE);
-			DestroyWindow(pr.hDlgPrint);
-		    }
-		    free(buf);
-		}
-	    }
-	    DeleteDC(printer);
-	    SetWindowLong(hwnd, 4, (LONG)(0L));
-	    PrintUnregister((GP_LPPRINT)&pr);
-	}
-    }
-    fclose(f);
-}
+//void WDPROC
+//DumpPrinter(HWND hwnd, LPSTR szAppName, LPSTR szFileName)
+//{
+//    HDC printer;
+//    PRINTDLG pd;
+//    GP_PRINT pr;
+//    DOCINFO di;
+//    char *buf;
+//    WORD *bufcount;
+//    int count;
+//    FILE *f;
+//    long lsize;
+//    long ldone;
+//    char pcdone[10];
+//
+//    memset(&pd, 0, sizeof(PRINTDLG));
+//    pd.lStructSize = sizeof(PRINTDLG);
+//    pd.hwndOwner = hwnd;
+//    pd.Flags = PD_PRINTSETUP | PD_RETURNDC;
+//
+//    if ((f = fopen(szFileName, "rb")) == (FILE *)NULL)
+//	return;
+//    fseek(f, 0L, SEEK_END);
+//    lsize = ftell(f);
+//    if (lsize <= 0)
+//	lsize = 1;
+//    fseek(f, 0L, SEEK_SET);
+//    ldone = 0;
+//
+//    if (PrintDlg(&pd)) {
+//	printer = pd.hDC;
+//	if (printer != (HDC)NULL) {
+//	    pr.hdcPrn = printer;
+//	    SetWindowLong(hwnd, 4, (LONG)((GP_LPPRINT)&pr));
+//	    PrintRegister((GP_LPPRINT)&pr);
+//	    if ( (buf = malloc(4096+2)) != (char *)NULL ) {
+//	    	bufcount = (WORD *)buf;
+//		EnableWindow(hwnd,FALSE);
+//		pr.bUserAbort = FALSE;
+///* is parent set correctly */
+//		pr.hDlgPrint = CreateDialogParam(hdllInstance,
+//						 "CancelDlgBox",
+//						 hwnd, PrintDlgProc,
+//						 (LPARAM) szAppName);
+//		SetAbortProc(printer, PrintAbortProc);
+//		di.cbSize = sizeof(DOCINFO);
+//		di.lpszDocName = szAppName;
+//		di.lpszOutput = NULL;
+//		if (StartDoc(printer, &di) > 0) {
+//		    while ( pr.hDlgPrint && !pr.bUserAbort
+//			    && (count = fread(buf+2, 1, 4096, f)) != 0 ) {
+//			*bufcount = count;
+//			Escape(printer, PASSTHROUGH, count+2, (LPSTR)buf, NULL);
+//	    		ldone += count;
+//	    		sprintf(pcdone, "%d%% done",
+//				(int) (ldone * 100 / lsize));
+//	    		SetWindowText(GetDlgItem(pr.hDlgPrint, CANCEL_PCDONE),
+//				      pcdone);
+//			if (pr.bUserAbort)
+//			    AbortDoc(printer);
+//			else
+//			    EndDoc(printer);
+//		    }
+//		    if (!pr.bUserAbort) {
+//			EnableWindow(hwnd,TRUE);
+//			DestroyWindow(pr.hDlgPrint);
+//		    }
+//		    free(buf);
+//		}
+//	    }
+//	    DeleteDC(printer);
+//	    SetWindowLong(hwnd, 4, (LONG)(0L));
+//	    PrintUnregister((GP_LPPRINT)&pr);
+//	}
+//    }
+//    fclose(f);
+//}
 
 #else  /* !WIN32 */
 

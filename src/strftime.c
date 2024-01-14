@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: strftime.c,v 1.6 2004/04/13 17:24:01 broeker Exp $"); }
+static char *RCSid() { return RCSid("$Id: strftime.c,v 1.7 2004/07/01 17:10:08 broeker Exp $"); }
 #endif
 
 /* GNUPLOT - strftime.c */
@@ -47,29 +47,35 @@ static char *RCSid() { return RCSid("$Id: strftime.c,v 1.6 2004/04/13 17:24:01 b
  * (written by Alexander Lehmann)
  */
 
+#define TEST_STRFTIME
 #define NOTIMEZONE
 
 #include "syscfg.h"		/* for MAX_LINE_LEN */
 #include "stdfn.h"		/* for safe_strncpy */
 
 #ifdef TEST_STRFTIME		/* test case; link with stdfn */
-#define strftime _strftime
+//#define strftime _strftime
 
 
 #include "national.h"		/* language info for the following, */
 			/* extracted from set.c */
 
-char full_month_names[12][32] =
-{FMON01, FMON02, FMON03, FMON04, FMON05,
- FMON06, FMON07, FMON08, FMON09, FMON10, FMON11, FMON12};
-char abbrev_month_names[12][8] =
-{AMON01, AMON02, AMON03, AMON04, AMON05,
- AMON06, AMON07, AMON08, AMON09, AMON10, AMON11, AMON12};
+//char full_month_names[12][32] =
+//{FMON01, FMON02, FMON03, FMON04, FMON05,
+// FMON06, FMON07, FMON08, FMON09, FMON10, FMON11, FMON12};
+//char abbrev_month_names[12][8] =
+//{AMON01, AMON02, AMON03, AMON04, AMON05,
+// AMON06, AMON07, AMON08, AMON09, AMON10, AMON11, AMON12};
 
-char full_day_names[7][32] =
-{FDAY0, FDAY1, FDAY2, FDAY3, FDAY4, FDAY5, FDAY6};
-char abbrev_day_names[7][8] =
-{ADAY0, ADAY1, ADAY2, ADAY3, ADAY4, ADAY5, ADAY6};
+//char full_day_names[7][32] =
+//{FDAY0, FDAY1, FDAY2, FDAY3, FDAY4, FDAY5, FDAY6};
+//char abbrev_day_names[7][8] =
+//{ADAY0, ADAY1, ADAY2, ADAY3, ADAY4, ADAY5, ADAY6};
+extern char full_month_names[12][32];
+extern char abbrev_month_names[12][8];
+extern char full_day_names[7][32];
+extern char abbrev_day_names[7][8];
+
 
 #endif /* TEST_STRFTIME */
 
@@ -208,6 +214,7 @@ strftime(char *s, size_t max, const char *format, const struct tm *tp)
     return s - start;
 }
 
+#undef TEST_STRFTIME
 #ifdef TEST_STRFTIME
 
 #undef strftime

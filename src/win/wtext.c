@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wtext.c,v 1.18 2008/06/02 16:07:00 mikulik Exp $"); }
+static char *RCSid() { return RCSid("$Id: wtext.c,v 1.19 2008/11/07 11:55:46 mikulik Exp $"); }
 #endif
 
 /* GNUPLOT - win/wtext.c */
@@ -63,6 +63,7 @@ static char *RCSid() { return RCSid("$Id: wtext.c,v 1.18 2008/06/02 16:07:00 mik
 # include <commdlg.h>
 #endif
 
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"
@@ -771,54 +772,54 @@ TextMakeFont(LPTW lptw)
 
 void
 TextSelectFont(LPTW lptw) {
-#if WINVER >= 0x030a
-    LOGFONT lf;
-    CHOOSEFONT cf;
-    HDC hdc;
-    char lpszStyle[LF_FACESIZE];
-    LPSTR p;
-
-    /* Set all structure fields to zero. */
-    _fmemset(&cf, 0, sizeof(CHOOSEFONT));
-    _fmemset(&lf, 0, sizeof(LOGFONT));
-    cf.lStructSize = sizeof(CHOOSEFONT);
-    cf.hwndOwner = lptw->hWndParent;
-    _fstrncpy(lf.lfFaceName,lptw->fontname,LF_FACESIZE);
-    if ( (p = _fstrstr(lptw->fontname," Bold")) != (LPSTR)NULL ) {
-	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
-    }
-    else if ( (p = _fstrstr(lptw->fontname," Italic")) != (LPSTR)NULL ) {
-	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
-    } else
-	_fstrcpy(lpszStyle,"Regular");
-    cf.lpszStyle = lpszStyle;
-    hdc = GetDC(lptw->hWndText);
-    lf.lfHeight = -MulDiv(lptw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
-    ReleaseDC(lptw->hWndText, hdc);
-    lf.lfPitchAndFamily = FIXED_PITCH;
-    cf.lpLogFont = &lf;
-    cf.nFontType = SCREEN_FONTTYPE;
-    cf.Flags = CF_SCREENFONTS | CF_FIXEDPITCHONLY | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
-    if (ChooseFont(&cf)) {
-	RECT rect;
-	_fstrcpy(lptw->fontname,lf.lfFaceName);
-	lptw->fontsize = cf.iPointSize / 10;
-	if (cf.nFontType & BOLD_FONTTYPE)
-	    lstrcat(lptw->fontname," Bold");
-	if (cf.nFontType & ITALIC_FONTTYPE)
-	    lstrcat(lptw->fontname," Italic");
-	TextMakeFont(lptw);
-	/* force a window update */
-	GetClientRect(lptw->hWndText, (LPRECT) &rect);
-	SendMessage(lptw->hWndText, WM_SIZE, SIZE_RESTORED,
-		    MAKELPARAM(rect.right-rect.left, rect.bottom-rect.top));
-	GetClientRect(lptw->hWndText, (LPRECT) &rect);
-	InvalidateRect(lptw->hWndText, (LPRECT) &rect, 1);
-	UpdateWindow(lptw->hWndText);
-    }
-#endif
+//#if WINVER >= 0x030a
+//    LOGFONT lf;
+//    CHOOSEFONT cf;
+//    HDC hdc;
+//    char lpszStyle[LF_FACESIZE];
+//    LPSTR p;
+//
+//    /* Set all structure fields to zero. */
+//    _fmemset(&cf, 0, sizeof(CHOOSEFONT));
+//    _fmemset(&lf, 0, sizeof(LOGFONT));
+//    cf.lStructSize = sizeof(CHOOSEFONT);
+//    cf.hwndOwner = lptw->hWndParent;
+//    _fstrncpy(lf.lfFaceName,lptw->fontname,LF_FACESIZE);
+//    if ( (p = _fstrstr(lptw->fontname," Bold")) != (LPSTR)NULL ) {
+//	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
+//	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
+//    }
+//    else if ( (p = _fstrstr(lptw->fontname," Italic")) != (LPSTR)NULL ) {
+//	_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
+//	lf.lfFaceName[ (unsigned int)(p-lptw->fontname) ] = '\0';
+//    } else
+//	_fstrcpy(lpszStyle,"Regular");
+//    cf.lpszStyle = lpszStyle;
+//    hdc = GetDC(lptw->hWndText);
+//    lf.lfHeight = -MulDiv(lptw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+//    ReleaseDC(lptw->hWndText, hdc);
+//    lf.lfPitchAndFamily = FIXED_PITCH;
+//    cf.lpLogFont = &lf;
+//    cf.nFontType = SCREEN_FONTTYPE;
+//    cf.Flags = CF_SCREENFONTS | CF_FIXEDPITCHONLY | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
+//    if (ChooseFont(&cf)) {
+//	RECT rect;
+//	_fstrcpy(lptw->fontname,lf.lfFaceName);
+//	lptw->fontsize = cf.iPointSize / 10;
+//	if (cf.nFontType & BOLD_FONTTYPE)
+//	    lstrcat(lptw->fontname," Bold");
+//	if (cf.nFontType & ITALIC_FONTTYPE)
+//	    lstrcat(lptw->fontname," Italic");
+//	TextMakeFont(lptw);
+//	/* force a window update */
+//	GetClientRect(lptw->hWndText, (LPRECT) &rect);
+//	SendMessage(lptw->hWndText, WM_SIZE, SIZE_RESTORED,
+//		    MAKELPARAM(rect.right-rect.left, rect.bottom-rect.top));
+//	GetClientRect(lptw->hWndText, (LPRECT) &rect);
+//	InvalidateRect(lptw->hWndText, (LPRECT) &rect, 1);
+//	UpdateWindow(lptw->hWndText);
+//    }
+//#endif
 }
 
 
@@ -865,12 +866,15 @@ WndParentProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	    + GetSystemMetrics(SM_CXVSCROLL) + 2*GetSystemMetrics(SM_CXFRAME);
 	MMinfo[3].y = ScreenMinSize.y*tm.tmHeight
 	    + GetSystemMetrics(SM_CYHSCROLL) + 2*GetSystemMetrics(SM_CYFRAME)
-	    + GetSystemMetrics(SM_CYCAPTION);
+//	    + GetSystemMetrics(SM_CYCAPTION);
+	    + GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(SM_CYMENU);
 	return(0);
     }
     case WM_SIZE:
-	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
-		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight,
+//	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
+//		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight,
+	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + GetSystemMetrics(SM_CYMENU),
+		     LOWORD(lParam), HIWORD(lParam)-lptw->ButtonHeight - GetSystemMetrics(SM_CYMENU),
 		     SWP_NOZORDER | SWP_NOACTIVATE);
 	return(0);
     case WM_COMMAND:
@@ -1211,13 +1215,16 @@ WndTextProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	} /* if(Ctrl) */
 	break;
 
-    case WM_RBUTTONDOWN:
+//    case WM_RBUTTONDOWN:
+    case WM_CONTEXTMENU:
     {
 	POINT pt;
 
-	pt.x = LOWORD(lParam);
-	pt.y = HIWORD(lParam);
-	ClientToScreen(hwnd,&pt);
+//	pt.x = LOWORD(lParam);
+	pt.x = max((SHORT)LOWORD(lParam), 0);
+//	pt.y = HIWORD(lParam);
+	pt.y = max((SHORT)HIWORD(lParam), 0);
+//	ClientToScreen(hwnd,&pt);
 	TrackPopupMenu(lptw->hPopMenu, TPM_LEFTALIGN,
 		       pt.x, pt.y, 0, hwnd, NULL);
 	return(0);

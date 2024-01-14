@@ -1,5 +1,5 @@
 /* Hello, Emacs: this is -*-C-*- !
- * $Id: post.trm,v 1.243.2.5 2010/05/11 04:22:24 sfeam Exp $
+ * $Id: post.trm,v 1.243.2.6 2010/10/07 05:31:42 sfeam Exp $
  */
 
 /* GNUPLOT - post.trm */
@@ -2684,8 +2684,10 @@ write_color_space(t_sm_palette *palette)
 	fputs("(XYZ)", gppsfile);
 	break;
     default:
+//	fprintf(stderr,"%s:%d ooops: Unkown color model '%c'. Will be RGB\n",
+//		__FILE__, __LINE__, (char)(palette->cmodel));
 	fprintf(stderr,"%s:%d ooops: Unkown color model '%c'. Will be RGB\n",
-		__FILE__, __LINE__, (char)(palette->cmodel));
+		".\term\post.trm", __LINE__, (char)(palette->cmodel));
 	fputs("(RGB)", gppsfile);
 	break;
     }
@@ -2772,8 +2774,10 @@ PS_make_header(t_sm_palette *palette)
 	write_gradient_definition(palette->gradient, palette->gradient_num);
 	break;
     default:
+//	fprintf(stderr, "%s:%d ooops: Unknown color mode '%c'\n",
+//		 __FILE__, __LINE__, (char)(sm_palette.colorMode));
 	fprintf(stderr, "%s:%d ooops: Unknown color mode '%c'\n",
-		 __FILE__, __LINE__, (char)(sm_palette.colorMode));
+		 ".\term\post.trm", __LINE__, (char)(sm_palette.colorMode));
     }
     fputs("/pm3dround {maxcolors 0 gt {dup 1 ge\n", gppsfile);
     fputs("\t{pop 1} {maxcolors mul floor maxcolors 1 sub div} ifelse} if} def\n",
@@ -3495,8 +3499,8 @@ PS_open_prologue_file(char *name)
 		dump = prologue_8859_9_ps;
 	else if (!strcmp(name,"cp1250.ps"))
 		dump = prologue_cp1250_ps;
-	else if (!strcmp(name,"cp1251.ps"))
-		dump = prologue_cp1251_ps;
+//	else if (!strcmp(name,"cp1251.ps"))
+//		dump = prologue_cp1251_ps;
 	else if (!strcmp(name,"cp437.ps"))
 		dump = prologue_cp437_ps;
 	else if (!strcmp(name,"cp850.ps"))

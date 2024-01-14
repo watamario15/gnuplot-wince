@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wgnuplib.c,v 1.5 2004/04/13 17:24:06 broeker Exp $"); }
+static char *RCSid() { return RCSid("$Id: wgnuplib.c,v 1.6 2004/07/01 17:10:10 broeker Exp $"); }
 #endif
 
 /* GNUPLOT - win/wgnuplib.c */
@@ -43,6 +43,7 @@ static char *RCSid() { return RCSid("$Id: wgnuplib.c,v 1.5 2004/04/13 17:24:06 b
 #include <ctype.h>
 #include <windows.h>
 #include <windowsx.h>
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"
@@ -110,15 +111,15 @@ HLOCAL hlocal;
 	return (char *)LocalLock(hlocal);
 }
 
-void
-LocalFreePtr(void NEAR *ptr)
-{
-HLOCAL hlocal;
-	hlocal = LocalHandle(ptr);
-	LocalUnlock(hlocal);
-	LocalFree(hlocal);
-	return;
-}
+//void
+//LocalFreePtr(void NEAR *ptr)
+//{
+//HLOCAL hlocal;
+//	hlocal = LocalHandle(ptr);
+//	LocalUnlock(hlocal);
+//	LocalFree(hlocal);
+//	return;
+//}
 
 
 /* ascii to int */

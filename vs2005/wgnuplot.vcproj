@@ -1,0 +1,1619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="wgnuplot"
+	ProjectGUID="{8BA94EFA-B45A-445A-9125-620E831288E4}"
+	RootNamespace="wgnuplot"
+	Keyword="Win32Proj"
+	>
+	<Platforms>
+		<Platform
+			Name="Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\src;..\term;..\wrapper"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;WINCE;DEBUG;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;lint;WINVER=_WIN32_WCE;_Windows;WIN32;HAVE_CONFIG_H;__MSC__;HELPFILE=\&quot;wgnuplot.hlp\&quot;;USE_MOUSE;GNUPLOT_HISTORY;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
+				MinimalRebuild="true"
+				RuntimeLibrary="1"
+				DisableLanguageExtensions="false"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+				CompileAs="1"
+				CompileForArchitecture="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);MSRC"
+				Culture="1041"
+				AdditionalIncludeDirectories="$(IntDir)"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /subsystem:windowsce,5.01"
+				OutputFile="$(OutDir)/wgnuplot.exe"
+				LinkIncremental="2"
+				DelayLoadDLLs="$(NOINHERIT)"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OutDir)/wgnuplot.pdb"
+				SubSystem="0"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				ExecutionBucket="7"
+				Optimization="2"
+				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="..\src;..\term;..\wrapper"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;WINCE;_WINDOWS;$(ARCHFAM);$(_ARCHFAM_);_UNICODE;UNICODE;lint;WINVER=_WIN32_WCE;_Windows;WIN32;HAVE_CONFIG_H;__MSC__;HELPFILE=\&quot;wgnuplot.hlp\&quot;;USE_MOUSE;GNUPLOT_HISTORY;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
+				RuntimeLibrary="0"
+				DisableLanguageExtensions="false"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+				CompileAs="1"
+				CompileForArchitecture="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);MSRC"
+				Culture="1041"
+				AdditionalIncludeDirectories="$(IntDir)"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /subsystem:windowsce,5.01"
+				OutputFile="$(OutDir)/wgnuplot.exe"
+				LinkIncremental="1"
+				DelayLoadDLLs="$(NOINHERIT)"
+				GenerateDebugInformation="false"
+				ProgramDatabaseFile="$(OutDir)/wgnuplot.pdb"
+				SubSystem="0"
+				StackReserveSize="65536"
+				StackCommitSize="4096"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCCodeSignTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+			<DeploymentTool
+				ForceDirty="-1"
+				RemoteDirectory=""
+				RegisterOutput="0"
+				AdditionalFiles=""
+			/>
+			<DebuggerTool
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath="..\src\alloc.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\axis.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\binary.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\bitmap.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\breaders.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\color.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\command.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\contour.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\datafile.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\dynarray.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\eval.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\fit.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\gadgets.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\getcolor.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\gpexecute.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\graph3d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\graphics.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\help.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\hidden3d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\history.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\internal.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\interpol.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\matrix.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\misc.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\mouse.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\parse.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\plot.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\plot2d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\plot3d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\pm3d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\readline.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\save.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\scanner.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\set.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\show.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\specfun.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\standard.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\stdfn.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\strftime.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\tables.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\tabulate.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\term.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\time.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\unset.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\util.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\util3d.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\variable.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\src\version.c"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<Filter
+				Name="win"
+				>
+				<File
+					RelativePath="..\src\win\wgnuplib.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\wgraph.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\winmain.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\wmenu.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\wpause.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\wprinter.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\src\win\wtext.c"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalOptions="/U &quot;_UNICODE&quot; /U &quot;UNICODE&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="wrapper"
+				>
+				<File
+					RelativePath="..\wrapper\wrapper.c"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+			<File
+				RelativePath="..\src\alloc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\axis.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\binary.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\bitmap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\breaders.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\color.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\command.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\config.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\contour.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\datafile.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\dynarray.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\eval.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\fit.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gadgets.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\getcolor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gp_hist.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gp_time.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gp_types.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\gpexecute.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\graph3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\graphics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\help.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\hidden3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\internal.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\interpol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\matrix.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\misc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\mouse.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\mousecmn.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\national.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\parse.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\plot.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\plot2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\plot3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\pm3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\readline.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\save.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\scanner.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\setshow.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\specfun.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\standard.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\stdfn.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\syscfg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\tables.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\tabulate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\template.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\term.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\term_api.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\util.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\util3d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\variable.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\version.h"
+				>
+			</File>
+			<Filter
+				Name="win"
+				>
+				<File
+					RelativePath="..\src\win\wcommon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\win\wgnuplib.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\win\winmain.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\win\wresourc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\win\wtext.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="wrapper"
+				>
+				<File
+					RelativePath="..\wrapper\direct.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\dos.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\errno.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\fcntl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\io.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\signal.h"
+					>
+				</File>
+				<File
+					RelativePath="..\wrapper\wrapper.h"
+					>
+				</File>
+				<Filter
+					Name="sys"
+					>
+					<File
+						RelativePath="..\wrapper\sys\stat.h"
+						>
+					</File>
+					<File
+						RelativePath="..\wrapper\sys\types.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+			<File
+				RelativePath="..\src\win\grpicon.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\src\win\texticon.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\src\win\wgnuplot.rc"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath="..\ReadMe.txt"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wgraph.c,v 1.67.2.16 2011/01/22 16:44:50 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: wgraph.c,v 1.67.2.17 2011/02/11 03:47:37 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - win/wgraph.c */
@@ -55,6 +55,7 @@ static char *RCSid() { return RCSid("$Id: wgraph.c,v 1.67.2.16 2011/01/22 16:44:
 #endif
 #include <stdio.h>
 #include <string.h>
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "wcommon.h"
@@ -781,50 +782,50 @@ SetFont(LPGW lpgw, HDC hdc)
 static void
 SelFont(LPGW lpgw)
 {
-#if WINVER >= 0x030a
-	LOGFONT lf;
-	CHOOSEFONT cf;
-	HDC hdc;
-	char lpszStyle[LF_FACESIZE];
-	char FAR *p;
-
-	/* Set all structure fields to zero. */
-	_fmemset(&cf, 0, sizeof(CHOOSEFONT));
-	_fmemset(&lf, 0, sizeof(LOGFONT));
-	cf.lStructSize = sizeof(CHOOSEFONT);
-	cf.hwndOwner = lpgw->hWndGraph;
-	_fstrncpy(lf.lfFaceName,lpgw->fontname,LF_FACESIZE);
-	if ((p = _fstrstr(lpgw->fontname," Bold")) != (LPSTR)NULL) {
-		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
-	} else if ((p = _fstrstr(lpgw->fontname," Italic")) != (LPSTR)NULL) {
-		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
-		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
-	} else {
-		_fstrcpy(lpszStyle,"Regular");
-	}
-	cf.lpszStyle = lpszStyle;
-	hdc = GetDC(lpgw->hWndGraph);
-	lf.lfHeight = -MulDiv(lpgw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
-	ReleaseDC(lpgw->hWndGraph, hdc);
-	cf.lpLogFont = &lf;
-	cf.nFontType = SCREEN_FONTTYPE;
-	cf.Flags = CF_SCREENFONTS | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
-	if (ChooseFont(&cf)) {
-		_fstrcpy(lpgw->fontname,lf.lfFaceName);
-		lpgw->fontsize = cf.iPointSize / 10;
-		if (cf.nFontType & BOLD_FONTTYPE)
-			lstrcat(lpgw->fontname," Bold");
-		if (cf.nFontType & ITALIC_FONTTYPE)
-			lstrcat(lpgw->fontname," Italic");
-		/* set current font as default font */
-		strcpy(lpgw->deffontname,lpgw->fontname);
-		lpgw->deffontsize = lpgw->fontsize;
-		SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
-		/* DBT 2010-02-22 replot to force immediate font change, volatile data OK */
-		do_string_replot("");
-	}
-#endif
+//#if WINVER >= 0x030a
+//	LOGFONT lf;
+//	CHOOSEFONT cf;
+//	HDC hdc;
+//	char lpszStyle[LF_FACESIZE];
+//	char FAR *p;
+//
+//	/* Set all structure fields to zero. */
+//	_fmemset(&cf, 0, sizeof(CHOOSEFONT));
+//	_fmemset(&lf, 0, sizeof(LOGFONT));
+//	cf.lStructSize = sizeof(CHOOSEFONT);
+//	cf.hwndOwner = lpgw->hWndGraph;
+//	_fstrncpy(lf.lfFaceName,lpgw->fontname,LF_FACESIZE);
+//	if ((p = _fstrstr(lpgw->fontname," Bold")) != (LPSTR)NULL) {
+//		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
+//		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
+//	} else if ((p = _fstrstr(lpgw->fontname," Italic")) != (LPSTR)NULL) {
+//		_fstrncpy(lpszStyle,p+1,LF_FACESIZE);
+//		lf.lfFaceName[ (unsigned int)(p-lpgw->fontname) ] = '\0';
+//	} else {
+//		_fstrcpy(lpszStyle,"Regular");
+//	}
+//	cf.lpszStyle = lpszStyle;
+//	hdc = GetDC(lpgw->hWndGraph);
+//	lf.lfHeight = -MulDiv(lpgw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+//	ReleaseDC(lpgw->hWndGraph, hdc);
+//	cf.lpLogFont = &lf;
+//	cf.nFontType = SCREEN_FONTTYPE;
+//	cf.Flags = CF_SCREENFONTS | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
+//	if (ChooseFont(&cf)) {
+//		_fstrcpy(lpgw->fontname,lf.lfFaceName);
+//		lpgw->fontsize = cf.iPointSize / 10;
+//		if (cf.nFontType & BOLD_FONTTYPE)
+//			lstrcat(lpgw->fontname," Bold");
+//		if (cf.nFontType & ITALIC_FONTTYPE)
+//			lstrcat(lpgw->fontname," Italic");
+//		/* set current font as default font */
+//		strcpy(lpgw->deffontname,lpgw->fontname);
+//		lpgw->deffontsize = lpgw->fontsize;
+//		SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
+//		/* DBT 2010-02-22 replot to force immediate font change, volatile data OK */
+//		do_string_replot("");
+//	}
+//#endif
 }
 
 #ifdef USE_MOUSE
@@ -1543,125 +1544,125 @@ CopyClip(LPGW lpgw)
 static void
 CopyPrint(LPGW lpgw)
 {
-#ifdef WIN32
-	DOCINFO docInfo;
-#endif
-
-#if WINVER >= 0x030a	/* If Win 3.0, this whole function does nothing at all ... */
-	HDC printer;
-#ifndef WIN32
-	DLGPROC lpfnAbortProc;
-	DLGPROC lpfnPrintDlgProc;
-#endif
-	PAGESETUPDLG pg;
-	DEVNAMES* pDevNames;
-	DEVMODE* pDevMode;
-	LPCTSTR szDriver, szDevice, szOutput;
-	HWND hwnd;
-	RECT rect;
-	GP_PRINT pr;
-
-	hwnd = lpgw->hWndGraph;
-
-
-	/* See http://support.microsoft.com/kb/240082 */
-
-	_fmemset (&pg, 0, sizeof pg);
-	pg.lStructSize = sizeof pg;
-	pg.hwndOwner = hwnd;
-
-	if (!PageSetupDlg (&pg))
-		return;
-
-	pDevNames = (DEVNAMES*) GlobalLock (pg.hDevNames);
-	pDevMode = (DEVMODE*) GlobalLock (pg.hDevMode);
-
-	szDriver = (LPCTSTR)pDevNames + pDevNames->wDriverOffset;
-	szDevice = (LPCTSTR)pDevNames + pDevNames->wDeviceOffset;
-	szOutput = (LPCTSTR)pDevNames + pDevNames->wOutputOffset;
-
-	printer = CreateDC (szDriver, szDevice, szOutput, pDevMode);
-
-	GlobalUnlock (pg.hDevMode);
-	GlobalUnlock (pg.hDevNames);
-
-	GlobalFree (pg.hDevMode);
-	GlobalFree (pg.hDevNames);
-
-	if (NULL == printer)
-		return;	/* abort */
-
-	if (!PrintSize(printer, hwnd, &rect)) {
-		DeleteDC(printer);
-		return; /* abort */
-	}
-
-	pr.hdcPrn = printer;
-	SetWindowLong(hwnd, 4, (LONG)((GP_LPPRINT)&pr));
-#ifdef WIN32
-	PrintRegister((GP_LPPRINT)&pr);
-#endif
-
-	EnableWindow(hwnd,FALSE);
-	pr.bUserAbort = FALSE;
-#ifdef WIN32
-	pr.hDlgPrint = CreateDialogParam(hdllInstance,"CancelDlgBox",hwnd,PrintDlgProc,(LPARAM)lpgw->Title);
-	SetAbortProc(printer,PrintAbortProc);
-
-	memset(&docInfo, 0, sizeof(DOCINFO));
-	docInfo.cbSize = sizeof(DOCINFO);
-	docInfo.lpszDocName = lpgw->Title;
-
-	if (StartDoc(printer, &docInfo) > 0) {
-#else /* not WIN32 */
-#  ifdef __DLL__
-	lpfnPrintDlgProc = (DLGPROC)GetProcAddress(hdllInstance, "PrintDlgProc");
-	lpfnAbortProc = (DLGPROC)GetProcAddress(hdllInstance, "PrintAbortProc");
-#  else /* __DLL__ */
-	lpfnPrintDlgProc = (DLGPROC)MakeProcInstance((FARPROC)PrintDlgProc, hdllInstance);
-	lpfnAbortProc = (DLGPROC)MakeProcInstance((FARPROC)PrintAbortProc, hdllInstance);
-#  endif /* __DLL__ */
-	pr.hDlgPrint = CreateDialogParam(hdllInstance,"CancelDlgBox",hwnd,lpfnPrintDlgProc,(LPARAM)lpgw->Title);
-	Escape(printer,SETABORTPROC,0,(LPSTR)lpfnAbortProc,NULL);
-	if (Escape(printer, STARTDOC, lstrlen(lpgw->Title),lpgw->Title, NULL) > 0) {
-#endif
-		SetMapMode(printer, MM_TEXT);
-		SetBkMode(printer,OPAQUE);
-#ifdef WIN32
-		StartPage(printer);
-#endif
-		DestroyFonts(lpgw);
-		MakeFonts(lpgw, (RECT FAR *)&rect, printer);
-		DestroyPens(lpgw);	/* rebuild pens */
-		MakePens(lpgw, printer);
-		drawgraph(lpgw, printer, (void *) &rect);
-#ifdef WIN32
-		if (EndPage(printer) > 0)
-			EndDoc(printer);
-# else /* WIN32 */
-		if (Escape(printer,NEWFRAME,0,NULL,NULL) > 0)
-			Escape(printer,ENDDOC,0,NULL,NULL);
-# endif /* WIN32 */
-	}
-	if (!pr.bUserAbort) {
-		EnableWindow(hwnd,TRUE);
-		DestroyWindow(pr.hDlgPrint);
-	}
-#ifndef WIN32
-#ifndef __DLL__
-	FreeProcInstance((FARPROC)lpfnPrintDlgProc);
-	FreeProcInstance((FARPROC)lpfnAbortProc);
-# endif /* __DLL__ */
-#endif /* WIN32 */
-	DeleteDC(printer);
-	SetWindowLong(hwnd, 4, (LONG)(0L));
-#ifdef WIN32
-	PrintUnregister((GP_LPPRINT)&pr);
-#endif /* WIN32 */
-	/* make certain that the screen pen set is restored */
-	SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
-#endif /* WIN Version >= 3.1 */
-	return;
+//#ifdef WIN32
+//	DOCINFO docInfo;
+//#endif
+//
+//#if WINVER >= 0x030a	/* If Win 3.0, this whole function does nothing at all ... */
+//	HDC printer;
+//#ifndef WIN32
+//	DLGPROC lpfnAbortProc;
+//	DLGPROC lpfnPrintDlgProc;
+//#endif
+//	PAGESETUPDLG pg;
+//	DEVNAMES* pDevNames;
+//	DEVMODE* pDevMode;
+//	LPCTSTR szDriver, szDevice, szOutput;
+//	HWND hwnd;
+//	RECT rect;
+//	GP_PRINT pr;
+//
+//	hwnd = lpgw->hWndGraph;
+//
+//
+//	/* See http://support.microsoft.com/kb/240082 */
+//
+//	_fmemset (&pg, 0, sizeof pg);
+//	pg.lStructSize = sizeof pg;
+//	pg.hwndOwner = hwnd;
+//
+//	if (!PageSetupDlg (&pg))
+//		return;
+//
+//	pDevNames = (DEVNAMES*) GlobalLock (pg.hDevNames);
+//	pDevMode = (DEVMODE*) GlobalLock (pg.hDevMode);
+//
+//	szDriver = (LPCTSTR)pDevNames + pDevNames->wDriverOffset;
+//	szDevice = (LPCTSTR)pDevNames + pDevNames->wDeviceOffset;
+//	szOutput = (LPCTSTR)pDevNames + pDevNames->wOutputOffset;
+//
+//	printer = CreateDC (szDriver, szDevice, szOutput, pDevMode);
+//
+//	GlobalUnlock (pg.hDevMode);
+//	GlobalUnlock (pg.hDevNames);
+//
+//	GlobalFree (pg.hDevMode);
+//	GlobalFree (pg.hDevNames);
+//
+//	if (NULL == printer)
+//		return;	/* abort */
+//
+//	if (!PrintSize(printer, hwnd, &rect)) {
+//		DeleteDC(printer);
+//		return; /* abort */
+//	}
+//
+//	pr.hdcPrn = printer;
+//	SetWindowLong(hwnd, 4, (LONG)((GP_LPPRINT)&pr));
+//#ifdef WIN32
+//	PrintRegister((GP_LPPRINT)&pr);
+//#endif
+//
+//	EnableWindow(hwnd,FALSE);
+//	pr.bUserAbort = FALSE;
+//#ifdef WIN32
+//	pr.hDlgPrint = CreateDialogParam(hdllInstance,"CancelDlgBox",hwnd,PrintDlgProc,(LPARAM)lpgw->Title);
+//	SetAbortProc(printer,PrintAbortProc);
+//
+//	memset(&docInfo, 0, sizeof(DOCINFO));
+//	docInfo.cbSize = sizeof(DOCINFO);
+//	docInfo.lpszDocName = lpgw->Title;
+//
+//	if (StartDoc(printer, &docInfo) > 0) {
+//#else /* not WIN32 */
+//#  ifdef __DLL__
+//	lpfnPrintDlgProc = (DLGPROC)GetProcAddress(hdllInstance, "PrintDlgProc");
+//	lpfnAbortProc = (DLGPROC)GetProcAddress(hdllInstance, "PrintAbortProc");
+//#  else /* __DLL__ */
+//	lpfnPrintDlgProc = (DLGPROC)MakeProcInstance((FARPROC)PrintDlgProc, hdllInstance);
+//	lpfnAbortProc = (DLGPROC)MakeProcInstance((FARPROC)PrintAbortProc, hdllInstance);
+//#  endif /* __DLL__ */
+//	pr.hDlgPrint = CreateDialogParam(hdllInstance,"CancelDlgBox",hwnd,lpfnPrintDlgProc,(LPARAM)lpgw->Title);
+//	Escape(printer,SETABORTPROC,0,(LPSTR)lpfnAbortProc,NULL);
+//	if (Escape(printer, STARTDOC, lstrlen(lpgw->Title),lpgw->Title, NULL) > 0) {
+//#endif
+//		SetMapMode(printer, MM_TEXT);
+//		SetBkMode(printer,OPAQUE);
+//#ifdef WIN32
+//		StartPage(printer);
+//#endif
+//		DestroyFonts(lpgw);
+//		MakeFonts(lpgw, (RECT FAR *)&rect, printer);
+//		DestroyPens(lpgw);	/* rebuild pens */
+//		MakePens(lpgw, printer);
+//		drawgraph(lpgw, printer, (void *) &rect);
+//#ifdef WIN32
+//		if (EndPage(printer) > 0)
+//			EndDoc(printer);
+//# else /* WIN32 */
+//		if (Escape(printer,NEWFRAME,0,NULL,NULL) > 0)
+//			Escape(printer,ENDDOC,0,NULL,NULL);
+//# endif /* WIN32 */
+//	}
+//	if (!pr.bUserAbort) {
+//		EnableWindow(hwnd,TRUE);
+//		DestroyWindow(pr.hDlgPrint);
+//	}
+//#ifndef WIN32
+//#ifndef __DLL__
+//	FreeProcInstance((FARPROC)lpfnPrintDlgProc);
+//	FreeProcInstance((FARPROC)lpfnAbortProc);
+//# endif /* __DLL__ */
+//#endif /* WIN32 */
+//	DeleteDC(printer);
+//	SetWindowLong(hwnd, 4, (LONG)(0L));
+//#ifdef WIN32
+//	PrintUnregister((GP_LPPRINT)&pr);
+//#endif /* WIN32 */
+//	/* make certain that the screen pen set is restored */
+//	SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
+//#endif /* WIN Version >= 3.1 */
+//	return;
 }
 
 /* ================================== */
@@ -2520,15 +2521,18 @@ WndGraphProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 					return 0;
 			}
 			return 0;
-		case WM_RBUTTONDOWN:
+//		case WM_RBUTTONDOWN:
+		case WM_CONTEXTMENU:
 			/* HBB 20010218: note that this only works in mouse-off
 			 * mode, now. You'll need to go via the System menu to
 			 * access this popup, instead */
 			{
 			POINT pt;
-			pt.x = LOWORD(lParam);
-			pt.y = HIWORD(lParam);
-			ClientToScreen(hwnd,&pt);
+//			pt.x = LOWORD(lParam);
+			pt.x = max((SHORT)LOWORD(lParam), 0);
+//			pt.y = HIWORD(lParam);
+			pt.y = max((SHORT)HIWORD(lParam), 0);
+//			ClientToScreen(hwnd,&pt);
 			TrackPopupMenu(lpgw->hPopMenu, TPM_LEFTALIGN,
 				pt.x, pt.y, 0, hwnd, NULL);
 			}

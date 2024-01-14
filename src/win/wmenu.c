@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: wmenu.c,v 1.8 2006/08/09 07:39:34 mikulik Exp $"); }
+static char *RCSid() { return RCSid("$Id: wmenu.c,v 1.8.4.1 2010/02/16 07:04:19 mikulik Exp $"); }
 #endif
 
 /* GNUPLOT - win/wmenu.c */
@@ -52,6 +52,7 @@ static char *RCSid() { return RCSid("$Id: wmenu.c,v 1.8 2006/08/09 07:39:34 miku
 #include <string.h>	/* only use far items */
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "wrapper.h"
 #include "wgnuplib.h"
 #include "wresourc.h"
 #include "stdfn.h"
@@ -328,6 +329,8 @@ OPENFILENAME ofn;
 char *szTitle;
 char *szFile;
 char *szFilter;
+#else
+char *szTitle;
 #endif
 
 	if ( (buf = LocalAllocPtr(LHND, MAXSTR+1)) == (char *)NULL )
@@ -481,7 +484,7 @@ char *szFilter;
 					         have a version number, so this will return FALSE.
 					*/
 					/* Make sure that the installed shell version supports this approach */
-					if (GetDllVersion(TEXT("shell32.dll")) >= PACKVERSION(4,0)) {
+					if (GetDllVersion0(TEXT("shell32.dll")) >= PACKVERSION(4,0)) {
 						ZeroMemory(&bi,sizeof(bi));
 						bi.hwndOwner = lptw->hWndParent;
 						bi.pidlRoot = NULL;
@@ -796,7 +799,8 @@ char FAR *ButtonText[BUTTONMAX];
             		MessageBox(lptw->hWndParent,(LPSTR) buf,lptw->Title, MB_ICONEXCLAMATION);
 			goto errorcleanup;
 		}
-		hMenu[nMenuLevel] = CreateMenu();
+//		hMenu[nMenuLevel] = CreateMenu();
+		hMenu[nMenuLevel] = CreatePopupMenu();
 		AppendMenu(hMenu[nMenuLevel > 0 ? nMenuLevel-1 : 0],
 			MF_STRING | MF_POPUP, (UINT)hMenu[nMenuLevel], (LPCSTR)buf);
 	  }
@@ -916,8 +920,10 @@ char FAR *ButtonText[BUTTONMAX];
 	/* move top of client text window down to allow space for buttons */
 	lptw->ButtonHeight = ButtonY+1;
 	GetClientRect(lptw->hWndParent, &rect);
-	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
-			rect.right, rect.bottom-lptw->ButtonHeight,
+//	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight,
+//			rect.right, rect.bottom-lptw->ButtonHeight,
+	SetWindowPos(lptw->hWndText, (HWND)NULL, 0, lptw->ButtonHeight + GetSystemMetrics(SM_CYMENU),
+			rect.right, rect.bottom-lptw->ButtonHeight - GetSystemMetrics(SM_CYMENU),
 			SWP_NOZORDER | SWP_NOACTIVATE);
 
 	/* create the buttons */
@@ -929,7 +935,8 @@ char FAR *ButtonText[BUTTONMAX];
 	for (i=0; i<lpmw->nButton; i++) {
 		lpmw->hButton[i] = CreateWindow("button", ButtonText[i],
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-				i * ButtonX, 0,
+//				i * ButtonX, 0,
+				i * ButtonX, GetSystemMetrics(SM_CYMENU),
 				ButtonX, ButtonY,
 				lptw->hWndParent, (HMENU)i,
 				lptw->hInstance, lptw);

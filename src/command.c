@@ -1,5 +1,5 @@
 #ifndef lint
-static char *RCSid() { return RCSid("$Id: command.c,v 1.181.2.8 2010/09/27 02:08:58 sfeam Exp $"); }
+static char *RCSid() { return RCSid("$Id: command.c,v 1.181.2.9 2010/11/12 19:34:39 sfeam Exp $"); }
 #endif
 
 /* GNUPLOT - command.c */
@@ -63,6 +63,7 @@ static char *RCSid() { return RCSid("$Id: command.c,v 1.181.2.8 2010/09/27 02:08
  *
  */
 
+#include "wrapper.h"
 #include "command.h"
 
 #include "axis.h"
@@ -2162,16 +2163,16 @@ void
 help_command()
 {
 
-    if (END_OF_COMMAND)
-	WinHelp(textwin.hWndParent, (LPSTR) winhelpname, HELP_INDEX, (DWORD) NULL);
-    else {
-	char buf[128];
-	int start = ++c_token;
-	while (!(END_OF_COMMAND))
-	    c_token++;
-	capture(buf, start, c_token - 1, 128);
-	WinHelp(textwin.hWndParent, (LPSTR) winhelpname, HELP_PARTIALKEY, (DWORD) buf);
-    }
+//    if (END_OF_COMMAND)
+//	WinHelp(textwin.hWndParent, (LPSTR) winhelpname, HELP_INDEX, (DWORD) NULL);
+//    else {
+//	char buf[128];
+//	int start = ++c_token;
+//	while (!(END_OF_COMMAND))
+//	    c_token++;
+//	capture(buf, start, c_token - 1, 128);
+//	WinHelp(textwin.hWndParent, (LPSTR) winhelpname, HELP_PARTIALKEY, (DWORD) buf);
+//    }
 }
 #else  /* !_Windows */
 void
