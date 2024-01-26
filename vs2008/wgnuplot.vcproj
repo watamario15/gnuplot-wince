@@ -51,7 +51,7 @@
 				WarningLevel="3"
 				DebugInformationFormat="3"
 				CompileAs="1"
-				CompileForArchitecture="0"
+				CompileForArchitecture="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -68,6 +68,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
+				AdditionalDependencies="&quot;C:\Program Files (x86)\Windows CE Tools\wce500\Toradex_CE500\Lib\ARMV4I\commdlg.lib&quot;"
 				OutputFile="$(OutDir)/wgnuplot.exe"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
@@ -153,6 +154,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.01"
+				AdditionalDependencies="&quot;C:\Program Files (x86)\Windows CE Tools\wce500\Toradex_CE500\Lib\ARMV4I\commdlg.lib&quot;"
 				OutputFile="$(OutDir)/wgnuplot.exe"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"

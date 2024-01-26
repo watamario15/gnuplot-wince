@@ -785,51 +785,55 @@ SetFont(LPGW lpgw, HDC hdc)
 static void
 SelFont(LPGW lpgw)
 {
-//#if WINVER >= 0x030a
-//	LOGFONTW lf;
-//	CHOOSEFONTW cf;
-//	HDC hdc;
-//	wchar_t lpszStyle[LF_FACESIZE];
-//	wchar_t *p;
-//
-//	/* Set all structure fields to zero. */
-//	_fmemset(&cf, 0, sizeof(CHOOSEFONTW));
-//	_fmemset(&lf, 0, sizeof(LOGFONTW));
-//	cf.lStructSize = sizeof(CHOOSEFONTW);
-//	cf.hwndOwner = lpgw->hWndGraph;
-//	AtoW(lf.lfFaceName, LF_FACESIZE, lpgw->fontname, -1);
-//	if ((p = wcsstr(lf.lfFaceName, L" Bold")) != NULL) {
-//		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
-//		*p = L'\0';
-//	} else if ((p = wcsstr(lf.lfFaceName, L" Italic")) != NULL) {
-//		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
-//		*p = L'\0';
-//	} else {
-//		wcscpy(lpszStyle, L"Regular");
-//	}
-//	cf.lpszStyle = lpszStyle;
-//	hdc = GetDC(lpgw->hWndGraph);
-//	lf.lfHeight = -MulDiv(lpgw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
-//	ReleaseDC(lpgw->hWndGraph, hdc);
-//	cf.lpLogFont = &lf;
-//	cf.nFontType = SCREEN_FONTTYPE;
-//	cf.Flags = CF_SCREENFONTS | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
-//
-//	if (ChooseFontW(&cf)) {
-//		WtoA(lpgw->fontname, MAXFONTNAME, lf.lfFaceName, -1);
-//		lpgw->fontsize = cf.iPointSize / 10;
-//		if (cf.nFontType & BOLD_FONTTYPE)
-//			lstrcat(lpgw->fontname," Bold");
-//		if (cf.nFontType & ITALIC_FONTTYPE)
-//			lstrcat(lpgw->fontname," Italic");
-//		/* set current font as default font */
-//		strcpy(lpgw->deffontname,lpgw->fontname);
-//		lpgw->deffontsize = lpgw->fontsize;
-//		SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
-//		/* DBT 2010-02-22 replot to force immediate font change, volatile data OK */
-//		do_string_replot("");
-//	}
-//#endif
+#if WINVER >= 0x030a
+	LOGFONTW lf;
+	CHOOSEFONTW cf;
+	HDC hdc;
+	wchar_t lpszStyle[LF_FACESIZE];
+	wchar_t *p;
+	BOOL ret;
+
+	/* Set all structure fields to zero. */
+	_fmemset(&cf, 0, sizeof(CHOOSEFONTW));
+	_fmemset(&lf, 0, sizeof(LOGFONTW));
+	cf.lStructSize = sizeof(CHOOSEFONTW);
+	cf.hwndOwner = lpgw->hWndGraph;
+	AtoW(lf.lfFaceName, LF_FACESIZE, lpgw->fontname, -1);
+	if ((p = wcsstr(lf.lfFaceName, L" Bold")) != NULL) {
+		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+		*p = L'\0';
+	} else if ((p = wcsstr(lf.lfFaceName, L" Italic")) != NULL) {
+		wcsncpy(lpszStyle,p+1,LF_FACESIZE);
+		*p = L'\0';
+	} else {
+		wcscpy(lpszStyle, L"Regular");
+	}
+	cf.lpszStyle = lpszStyle;
+	hdc = GetDC(lpgw->hWndGraph);
+	lf.lfHeight = -MulDiv(lpgw->fontsize, GetDeviceCaps(hdc, LOGPIXELSY), 72);
+	cf.lpLogFont = &lf;
+	cf.nFontType = SCREEN_FONTTYPE;
+	cf.hDC = hdc;  /* Required for CF_BOTH. */
+	cf.Flags = CF_BOTH | CF_INITTOLOGFONTSTRUCT | CF_USESTYLE;
+
+	ret = ChooseFontW(&cf);
+	ReleaseDC(lpgw->hWndGraph, hdc);
+
+	if (ret) {
+		WtoA(lpgw->fontname, MAXFONTNAME, lf.lfFaceName, -1);
+		lpgw->fontsize = cf.iPointSize / 10;
+		if (cf.nFontType & BOLD_FONTTYPE)
+			lstrcat(lpgw->fontname," Bold");
+		if (cf.nFontType & ITALIC_FONTTYPE)
+			lstrcat(lpgw->fontname," Italic");
+		/* set current font as default font */
+		strcpy(lpgw->deffontname,lpgw->fontname);
+		lpgw->deffontsize = lpgw->fontsize;
+		SendMessage(lpgw->hWndGraph,WM_COMMAND,M_REBUILDTOOLS,0L);
+		/* DBT 2010-02-22 replot to force immediate font change, volatile data OK */
+		do_string_replot("");
+	}
+#endif
 }
 
 #ifdef USE_MOUSE

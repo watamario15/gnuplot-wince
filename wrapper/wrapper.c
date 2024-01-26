@@ -143,7 +143,7 @@ void FreeDuplicatedString(void* p)
 		free(p);
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
 	int Result;
 	char* p;
@@ -1017,21 +1017,21 @@ int GetMenuItemCount(HMENU hMenu)
 	UINT Min;
 	UINT Max;
 	UINT i;
-	MENUITEMINFO mii;
+	MENUITEMINFOW mii;
 	Min = 0;
 	Max = 65536;
 	i = (Max + Min) / 2;
-	memset(&mii, 0, sizeof(MENUITEMINFO));
-	mii.cbSize = sizeof(MENUITEMINFO);
+	memset(&mii, 0, sizeof(MENUITEMINFOW));
+	mii.cbSize = sizeof(MENUITEMINFOW);
 	while(Max - Min > 1)
 	{
-		if(GetMenuItemInfo(hMenu, i, TRUE, &mii))
+		if(GetMenuItemInfoW(hMenu, i, TRUE, &mii))
 			Min = i;
 		else
 			Max = i;
 		i = (Max + Min) / 2;
 	}
-	if(!GetMenuItemInfo(hMenu, Min, TRUE, &mii))
+	if(!GetMenuItemInfoW(hMenu, Min, TRUE, &mii))
 		Max--;
 	return (int)Max;
 }
@@ -1088,7 +1088,7 @@ BOOL GetTextExtentExPointA(HDC hdc, LPCSTR lpszString, int cchString, int nMaxEx
 	bResult = FALSE;
 	p = DuplicateAtoW(lpszString, cchString);
 	if(p)
-		bResult = GetTextExtentExPointW(hdc, p, _tcslen(p), nMaxExtent, lpnFit, lpnDx, lpSize);
+		bResult = GetTextExtentExPointW(hdc, p, wcslen(p), nMaxExtent, lpnFit, lpnDx, lpSize);
 	FreeDuplicatedString(p);
 	return bResult;
 }
